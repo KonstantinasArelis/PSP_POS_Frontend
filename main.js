@@ -5,13 +5,12 @@ const axios = require('axios')
 console.log("LOG: starting dabar")
 
 ipcMain.on('get-test-string', async (event) => {
-  console.log("LOG: trying something:");
+  console.log("LOG: main.js is trying to work");
   try {
-    const response = await axios.get('http://localhost:5274/order'); 
+    //order?employee_id=123&min_total_amount=50&max_total_amount=100&order_status=OPEN&page_nr=1&limit=25
+    const response = await axios.get('http://localhost:5274/order?employee_id=123&min_total_amount=50&max_total_amount=1000&order_status=OPEN&page_nr=0&limit=25');
     event.reply('test-string-data', response.data); 
-    console.log("LOG: response:" + response);
-  } catch (error) {
-    console.log("LOG: response:" + response);
+  } catch (error) {http://localhost:5274/order
     console.error('Error fetching data:', error);
     event.reply('test-string-error', error);
   }
