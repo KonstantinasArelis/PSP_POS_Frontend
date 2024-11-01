@@ -26,7 +26,7 @@ const createWindow = () => {
     }
   })
 
-  win.loadFile('index.html')
+  win.loadFile('react-app/public/index.html')
 }
 
 app.whenReady().then(() => {
