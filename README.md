@@ -31,5 +31,11 @@ You might want to add these configurations (VScode):
   }
 ]
 ```
+
+To launch the electron desktop app:
+1. start the backend
+2. do ``` npm start ``` at /react-app
+3. then start the electron app main + renderer (preferably through the configurations above)
+
 More info at:
 https://www.electronjs.org/docs/latest/tutorial/tutorial-first-app
