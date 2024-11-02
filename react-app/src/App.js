@@ -1,24 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
+
+function OrderList() {
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const orders = await window.electronAPI.getOrdersFrontend();
+      setOrders(orders);
+    };
+
+    fetchOrders();
+  }, []);
+
+  return (
+    <ul>
+      {orders.map((order) => (
+        <li key={order.id}>
+          Order ID: {order.id}, Total: {order.total_amount}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 
 function App() {
+  window.electronAPI.doThing();
+  console.log("hello from app.js")
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <OrderList></OrderList>
   );
 }
 
