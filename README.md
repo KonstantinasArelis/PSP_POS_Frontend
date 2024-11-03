@@ -3,9 +3,16 @@
 1. Install node.js
 2. Clone the repo
 3. inside the repo folder do:
+    ```
     npm install --save-dev electron
     npm install axios
-
+    ```
+4. at react-app folder do:
+    ```
+    npm install @mui/material @emotion/react @emotion/styled
+    @fontsource/roboto
+    @mui/icons-material
+    ```
 You might want to add these configurations (VScode): 
 ```
 "configurations": [

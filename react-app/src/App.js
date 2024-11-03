@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import './MenuAppBar';
+import MenuAppBar from './MenuAppBar';
 
 function OrderList() {
   const [orders, setOrders] = useState([]);
@@ -29,7 +31,7 @@ function App() {
   window.electronAPI.doThing();
   console.log("hello from app.js")
   return (
-    <OrderList></OrderList>
+    <MenuAppBar></MenuAppBar>
   );
 }
 
