@@ -9,6 +9,7 @@
     ```
 4. at react-app folder do:
     ```
+    npm install react-router-dom@5
     npm install @mui/material @emotion/react @emotion/styled
     @fontsource/roboto
     @mui/icons-material
