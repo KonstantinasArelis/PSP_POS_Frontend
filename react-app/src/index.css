@@ -33,3 +33,6 @@
   margin: 40px auto;
   padding: 20px;
 }
+.CreateReservation label {
+  display: block;
+}

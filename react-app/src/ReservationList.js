@@ -1,5 +1,5 @@
 const ReservationsList = ({reservations}) => {
-
+    console.log(reservations);
     return(
         <div>
             {reservations.map(reservation =>(

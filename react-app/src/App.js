@@ -10,7 +10,7 @@ import Taxes from './Taxes';
 import Discounts from './Discounts';
 import Users from './Users';
 import Orders from './Orders';
-
+import CreateReservation from './CreateReservation';
 /*
 function OrderList() {
   const [orders, setOrders] = useState([]);
@@ -70,6 +70,9 @@ function App() {
             </Route>
             <Route path="/Orders">
               <Orders />
+            </Route>
+            <Route path="/CreateReservation">
+              <CreateReservation />
             </Route>
             <Route path="*">
               <NotFound/>
