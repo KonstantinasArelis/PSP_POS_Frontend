@@ -10,6 +10,7 @@ import Taxes from './Taxes';
 import Discounts from './Discounts';
 import Users from './Users';
 import Orders from './Order/Orders';
+import OrderView from './Order/OrderView';
 import CreateReservation from './CreateReservation';
 /*
 function OrderList() {
@@ -68,8 +69,11 @@ function App() {
             <Route path="/Discounts">
               <Discounts />
             </Route>
-            <Route path="/Orders">
+            <Route exact path="/Orders">
               <Orders />
+            </Route>
+            <Route path="/Orders/:id">
+              <OrderView />
             </Route>
             <Route path="/CreateReservation">
               <CreateReservation />

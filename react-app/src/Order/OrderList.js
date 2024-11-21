@@ -1,5 +1,6 @@
 import './Order.css';
 import {useState } from "react";
+import {Link} from "react-router-dom";
 
 const OrderList = ({props}) => {
     
@@ -10,26 +11,25 @@ const OrderList = ({props}) => {
     return(
         <div>
             {orders.map(order =>(
-                <Order order={order}/>
+                <Order props={[order, apiurl]} key={order.id}/>
             ))}
         </div>
     );
 }
 
-const Order = ({order}) => {
-    console.log(order.id);
-    
-    const [existent, SetExistent] = useState(true);
+const Order = ({props}) => {    
+    const [order, apiurl] = props;
+    const [existent, setExistent] = useState(true);
     
     function deleteOrder() {
-        var del = "http://localhost:5274/Order/" + order.id;
+        var del = apiurl + order.id;
         fetch(del, {method: "DELETE"});
-        SetExistent(false);
+        setExistent(false);
         console.log("done");
     }
     
     return(existent ?
-        <div className="order" key={order.id}>
+        <div className="order">
             <div className="column1">
                 <p>id: {order.id}</p>
                 <p>total amount: {order.total_amount}</p>
@@ -38,7 +38,7 @@ const Order = ({order}) => {
                 <p>created at: {new Date(order.created_at).toLocaleDateString("LT")}</p>
             </div>
             <div className="column2">
-                <button >edit</button>
+                <Link to={"/Orders/" + order.id}><button>open</button></Link>
                 <button onClick={() => deleteOrder()}>delete</button>
             </div>
         </div> 
@@ -47,10 +47,3 @@ const Order = ({order}) => {
 }
 
 export default OrderList;
-
-/*                    <p>business_id: {order.business_id}</p>
-                    <p>employee_id: {order.employee_id}</p>
-                    <p>order_discount_percentage: {order.order_discount_percentage}</p>
-                    <p>tax_amount: {order.tax_amount}</p>
-                    
-                    <p>closed_at: {order.closed_at}</p>*/
