@@ -9,7 +9,7 @@ import Surcharges from './Surcharges';
 import Taxes from './Taxes';
 import Discounts from './Discounts';
 import Users from './Users';
-import Orders from './Orders';
+import Orders from './Order/Orders';
 import CreateReservation from './CreateReservation';
 /*
 function OrderList() {
