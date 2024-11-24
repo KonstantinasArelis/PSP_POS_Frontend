@@ -14,9 +14,25 @@ const Orders = () => {
         SetUrl("http://localhost:5274/Order/" + newUrl);
     }
 
+    async function createOrder(){
+        var order = newOrder;
+        order.employee_id = userId;
+        var serializedOrder = JSON.stringify(JSON.stringify(order));
+        var headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        console.log(serializedOrder);
+        var res = await fetch("http://localhost:5274/Order/", {method:"POST", body:serializedOrder, headers:headers})
+            .then(response => response.json());
+            //.then(data => {console.log(data)});
+        //var resjs = response.json();
+        //console.log("body is |" +  JSON.stringify(resjs) + "|");
+        window.location.href = window.location.href + "/" + res.id;
+        console.log(res);
+    }
+
     return(
         <div>
-            <Link to="/CreateOrder">Create Order:</Link>
+            <button onClick={createOrder}>Create Order</button>
             <h2>Orders:</h2>
             <OrderViewInput onChange={handleUrlChange}></OrderViewInput>
             {error && <div>{error}</div>}
@@ -25,6 +41,19 @@ const Orders = () => {
             
         </div>
     );
+}
+
+const newOrder = {
+    business_id:null, 
+    employee_id:null, 
+    order_disount_percentage:0, 
+    total_amount:0, 
+    tax_amount:0,
+    total_discount_amount:0,
+    order_status:"OPEN",
+    created_at: new Date(),
+    closed_at:null,
+    items:null
 }
 
 export default Orders;
