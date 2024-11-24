@@ -35,7 +35,7 @@ const Order = ({props}) => {
                 <p>total amount: {order.total_amount}</p>
                 <p>total discount amount: {order.total_discount_amount}</p>
                 <p>order status: {order.order_status}</p>
-                <p>created at: {new Date(order.created_at).toLocaleDateString("LT")}</p>
+                <p>created at: {order.created_at == null ? null : new Date(order.created_at).toLocaleDateString("LT")}</p>
             </div>
             <div className="column2">
                 <Link to={"/Orders/" + order.id}><button>open</button></Link>

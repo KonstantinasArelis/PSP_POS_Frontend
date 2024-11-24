@@ -25,6 +25,25 @@ const OrderView = () => {
 
 const Order = ({props}) => {
     const [order, apiurl] = props;
+    const [status, setStatus] = useState(order.order_status);
+    
+    async function deleteYourself(){
+        const del = apiurl + order.id;
+        const response = await fetch(del, {method: "DELETE"});
+        console.log(response.status);
+        window.location.href = window.location.href.replace("/" + order.id, "");
+    }
+
+    async function proceedToPay(){
+        const targetUrl = apiurl + order.id + "/status";
+        const payStatus = JSON.stringify(JSON.stringify({status:"PENDING_PAYMENT"}));
+        var headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        const response = await fetch(targetUrl, {method:"POST", body:payStatus, headers:headers});
+        if(response.ok) setStatus("PENDING_PAYMENT");
+        //TODO: payment handling goes here
+    }
+    
     return(
         <div className="fullOrder">
             <div>
@@ -35,14 +54,20 @@ const Order = ({props}) => {
                 <p>tax amount: {order.tax_amount}</p>
                 <p>order discount percentage: {order.order_discount_percentage}</p>
                 <p>total discount amount: {order.total_discount_amount}</p>
-                <p>order status: {order.order_status}</p>
-                <p>created at: {new Date(order.created_at).toLocaleDateString("LT")}</p>            
-                <p>closed at: {new Date(order.closed_at).toLocaleDateString("LT")}</p>
+                <p>order status: {status}</p>
+                <p>created at: {order.created_at == null ? null : new Date(order.created_at).toLocaleDateString("LT")}</p>            
+                <p>closed at: {order.closed_at == null ? null : new Date(order.created_at).toLocaleDateString("LT")}</p>
             </div>
+            {order.order_status != "CLOSED" &&
+                <div>
+                    <button onClick={deleteYourself}>cancel order</button>
+                    <button onClick={proceedToPay}>proceed to payment</button>
+                </div>
+            }
             <div>
                 <h1>Items</h1>
                 <OrderItemsList props={[order.items, apiurl + order.id + "/OrderItem/"]}/>
-            </div>            
+            </div>         
         </div>
     ) 
 }

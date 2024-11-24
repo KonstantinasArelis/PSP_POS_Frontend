@@ -21,13 +21,11 @@ const Orders = () => {
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
         console.log(serializedOrder);
-        var res = await fetch("http://localhost:5274/Order/", {method:"POST", body:serializedOrder, headers:headers})
-            .then(response => response.json());
-            //.then(data => {console.log(data)});
-        //var resjs = response.json();
-        //console.log("body is |" +  JSON.stringify(resjs) + "|");
-        window.location.href = window.location.href + "/" + res.id;
-        console.log(res);
+        const response = await fetch("http://localhost:5274/Order/", {method:"POST", body:serializedOrder, headers:headers});
+        if(response.ok){
+            const createdOrder = await response.json();
+            window.location.href = window.location.href + "/" + createdOrder.id;
+        }
     }
 
     return(
