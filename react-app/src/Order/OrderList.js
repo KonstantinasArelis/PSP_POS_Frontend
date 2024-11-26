@@ -39,7 +39,7 @@ const Order = ({props}) => {
             </div>
             <div className="column2">
                 <Link to={"/Orders/" + order.id}><button>open</button></Link>
-                <button onClick={() => deleteOrder()}>delete</button>
+                <button onClick={order.order_status != "CLOSED" ? () => deleteOrder() : null}>delete</button>
             </div>
         </div> 
         : null

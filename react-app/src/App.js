@@ -11,6 +11,7 @@ import Discounts from './Discounts';
 import Users from './Users';
 import Orders from './Order/Orders';
 import OrderView from './Order/OrderView';
+import OrderItemView from './Order/OrderItemView';
 import CreateReservation from './CreateReservation';
 /*
 function OrderList() {
@@ -72,8 +73,11 @@ function App() {
             <Route exact path="/Orders">
               <Orders />
             </Route>
-            <Route path="/Orders/:id">
+            <Route exact path="/Orders/:id">
               <OrderView />
+            </Route>
+            <Route path="/Orders/:orderId/Item/:itemId">
+              <OrderItemView />
             </Route>
             <Route path="/CreateReservation">
               <CreateReservation />

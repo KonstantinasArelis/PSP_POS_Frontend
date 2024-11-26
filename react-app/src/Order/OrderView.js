@@ -43,6 +43,10 @@ const Order = ({props}) => {
         if(response.ok) setStatus("PENDING_PAYMENT");
         //TODO: payment handling goes here
     }
+
+    async function addItem() {
+        
+    }
     
     return(
         <div className="fullOrder">
@@ -58,7 +62,7 @@ const Order = ({props}) => {
                 <p>created at: {order.created_at == null ? null : new Date(order.created_at).toLocaleDateString("LT")}</p>            
                 <p>closed at: {order.closed_at == null ? null : new Date(order.created_at).toLocaleDateString("LT")}</p>
             </div>
-            {order.order_status != "CLOSED" &&
+            { status != "CLOSED" &&
                 <div>
                     <button onClick={deleteYourself}>cancel order</button>
                     <button onClick={proceedToPay}>proceed to payment</button>
@@ -67,14 +71,14 @@ const Order = ({props}) => {
             <div>
                 <h1>Items</h1>
                 <OrderItemsList props={[order.items, apiurl + order.id + "/OrderItem/"]}/>
-            </div>         
+            </div>
+            { status != "CLOSED" &&
+                <div>
+                    <button onClick={addItem}>add item</button>
+                </div>
+            }    
         </div>
     ) 
 }
 
 export default OrderView
-
-/*<div className="column2">
-                <button >edit</button>
-                <button onClick={() => deleteOrder()}>delete</button>
-            </div>*/
