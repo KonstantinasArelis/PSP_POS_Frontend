@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "../useFetch";
 import OrderItemsList from "./OrderItemsList";
 import NotFound from '../NotFound';
+import AddItem from "./AddItem";
 
 
 const OrderView = () => {
@@ -26,6 +27,7 @@ const OrderView = () => {
 const Order = ({props}) => {
     const [order, orderUrl] = props;
     const [status, setStatus] = useState(order.order_status);
+    const [items, setItems] = useState(order.items);
     
     async function deleteYourself(){
         const response = await fetch(orderUrl, {method: "DELETE"});
@@ -43,8 +45,32 @@ const Order = ({props}) => {
         //TODO: payment handling goes here
     }
 
-    async function addItem() {
-        
+    async function addItem(item) {
+        item.order_id = order.id;
+        const body = JSON.stringify(JSON.stringify(item));
+        console.log(body);
+        var headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        const response = await fetch(orderUrl + "/orderItem", {method:"POST", body:body, headers:headers});
+        if(response.ok){
+            const newItems = structuredClone(items);
+            const createdItem = await response.json();
+            newItems.push(createdItem);
+            setItems(newItems);
+        }
+    }
+
+    async function removeItem(item) {
+        const index = items.indexOf(item);
+        if(index > -1){
+            const del = orderUrl + "/orderItem/" + item.id;
+            const response = await fetch(del, {method: "DELETE"});
+            if(response.ok){
+                const newItems = structuredClone(items);
+                newItems.splice(index, 1);
+                setItems(newItems);
+            }
+        }
     }
     
     return(
@@ -69,13 +95,9 @@ const Order = ({props}) => {
             }
             <div>
                 <h1>Items</h1>
-                <OrderItemsList props={[order.items, orderUrl + "/OrderItem/", status != "CLOSED"]}/>
+                <OrderItemsList props={[items, status != "CLOSED", removeItem]}/>
             </div>
-            { status != "CLOSED" &&
-                <div>
-                    <button onClick={addItem}>add item</button>
-                </div>
-            }
+            { status != "CLOSED" && <AddItem props={[addItem, "http://localhost:5274/"]}/>}
         </div>
     ) 
 }
