@@ -37,8 +37,8 @@ const OrderItem = ({props}) => {
                 <p>item discount amount: {item.total_discount_amount}</p>
             </div>
             <div className="column2">
-                `<Link to={"/Orders/" + item.order_id + "/Item/" + item.id}><button>open</button></Link>
-                <button onClick={editable ? () => deleteItem() : null}>delete</button>`
+                <Link to={"/Orders/" + item.order_id + "/Item/" + item.id}><button>open</button></Link>
+                <button onClick={editable ? () => deleteItem() : null}>delete</button>
             </div>
         </div> 
         : null

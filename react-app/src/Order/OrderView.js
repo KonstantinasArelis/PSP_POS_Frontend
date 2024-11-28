@@ -18,24 +18,23 @@ const OrderView = () => {
         <div>
             {error && <NotFound/>}
             {isPending && <div>Loading...</div>}
-            {order && (userId == order.employee_id ? <Order props={[order, apiurl]}/> : <NotFound/>)}
+            {order && (userId == order.employee_id ? <Order props={[order, orderUrl]}/> : <NotFound/>)}
         </div>
     )
 }
 
 const Order = ({props}) => {
-    const [order, apiurl] = props;
+    const [order, orderUrl] = props;
     const [status, setStatus] = useState(order.order_status);
     
     async function deleteYourself(){
-        const del = apiurl + order.id;
-        const response = await fetch(del, {method: "DELETE"});
+        const response = await fetch(orderUrl, {method: "DELETE"});
         console.log(response.status);
         window.location.href = window.location.href.replace("/" + order.id, "");
     }
 
     async function proceedToPay(){
-        const targetUrl = apiurl + order.id + "/status";
+        const targetUrl = orderUrl + "/status";
         const payStatus = JSON.stringify(JSON.stringify({status:"PENDING_PAYMENT"}));
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
@@ -70,13 +69,13 @@ const Order = ({props}) => {
             }
             <div>
                 <h1>Items</h1>
-                <OrderItemsList props={[order.items, apiurl + order.id + "/OrderItem/"]}/>
+                <OrderItemsList props={[order.items, orderUrl + "/OrderItem/", status != "CLOSED"]}/>
             </div>
             { status != "CLOSED" &&
                 <div>
                     <button onClick={addItem}>add item</button>
                 </div>
-            }    
+            }
         </div>
     ) 
 }
