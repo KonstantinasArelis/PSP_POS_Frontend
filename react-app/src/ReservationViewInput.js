@@ -3,7 +3,6 @@ import useFetch from './useFetch';
 import ReservationsList from './ReservationList';
 
 const ReservationViewInput = ( {onChange}) => {
-
     const [isPending, SetIsPending] = useState(false);
     const [page_nr, Setpage_nr] = useState('');
     const [limit, Setlimit] = useState('');

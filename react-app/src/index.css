@@ -29,9 +29,10 @@
   color: #1b54f1;
 }
 .content {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
+    margin: 20px;
+    padding: 0px;
+    text-align: left;
+    max-width: 3000px; 
 }
 .CreateReservation label {
   display: block;

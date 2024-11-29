@@ -11,6 +11,7 @@ import Discounts from './Discounts';
 import Users from './Users';
 import Orders from './Orders';
 import CreateReservation from './CreateReservation';
+import './App.css';
 /*
 function OrderList() {
   const [orders, setOrders] = useState([]);
@@ -40,7 +41,7 @@ function App() {
   console.log("hello from app.js")
   return (
     <Router>
-      <div className="App">
+      <div className="App" >
         <Navbar />
         <div className="content">
           <Switch>
