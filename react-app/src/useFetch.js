@@ -24,7 +24,6 @@ const useFetch = (url) => {
       })
       .catch(err => {
         if (err.name === 'AbortError') {
-          console.log('fetch aborted')
         } else {
           // auto catches network / connection error
           setIsPending(false);
@@ -36,7 +35,6 @@ const useFetch = (url) => {
     // abort the fetch
     return () => abortCont.abort();
   }, [url])
-  console.log("orders have been fetched")
   return { data, isPending, error };
 }
  

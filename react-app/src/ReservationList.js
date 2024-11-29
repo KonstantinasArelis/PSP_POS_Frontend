@@ -2,13 +2,16 @@ import clock from './Images/109613.png';
 import service from './Images/1005661.png';
 import status from './Images/1721936.png';
 import employee from './Images/2815428.png';
+import React, { useState } from 'react';
+import ReservationEditPanel from './ReservationEditPanel.js';
 
-const ReservationsList = ({reservations}) => {
+const ReservationsList = ({reservations, onRefresh}) => {
+    const [isPanelVisible, setIsPanelVisible] = useState(null);
+
+    /*
     console.log(reservations);
-
-    
-     reservations = [
-        {
+    reservations = [
+    {
           id: 1,
           business_id: 'business123',
           employee_id: 'employee456',
@@ -34,12 +37,23 @@ const ReservationsList = ({reservations}) => {
           ReservationStatus: 'Pending',
           service_id: 'service101',
         },
-      ];
-    
+    ];
+    */
+    const handleClick = (id) => {
+        
+        console.log("reservations with id: " + id + " was clicked");
+        if(isPanelVisible === id){
+            setIsPanelVisible(null);
+        } else{
+            setIsPanelVisible(id);
+        }
+    }
+
     return(
         <div className="allReservationsContainer">
             {reservations.map(reservation =>(
                 <div key={reservation.id} className="reservationContainer">
+                    <div onClick={() => handleClick(reservation.id)} className="editClickZone"></div>
                     <p className="reservationId">ID: {reservation.id}</p>
                     <p className="reservationEmployeeId"> <img id="icon"src={employee}/> {reservation.employee_id}</p>
                     <p className="reservationClientName">{reservation.client_name}</p>
@@ -48,6 +62,11 @@ const ReservationsList = ({reservations}) => {
                     <p className="reservationDuration">{reservation.duration} <img id="icon"src={clock}/></p>
                     <p className="reservationReservationStatus"> <img id="icon"src={status}/> {reservation.ReservationStatus}</p>
                     <p className="reservationServiceId"> <img id="icon"src={service}/> {reservation.service_id}</p>
+                    
+                    {reservation.id === isPanelVisible && (
+                        
+                        <ReservationEditPanel reservation = {reservation} onRefresh = {onRefresh}></ReservationEditPanel>
+                    )}
                 </div>
             ))}
         </div>

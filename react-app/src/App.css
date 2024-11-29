@@ -83,3 +83,30 @@
     height: 20px;
     width: 20px;
 }
+
+.reservationEditPanel {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 100%;
+    bottom: 70%;
+    border-radius: 30px;
+    background-color: rgb(206, 217, 255);
+    height: 500px;
+    width: 500px;
+    z-index: 2;
+    padding: 15px;
+}
+
+.reservationEditInput {
+    height: 20px;
+    border-radius: 10px;
+    border: none;
+}
+
+.editClickZone {
+    position: relative;
+    height: 250px;
+    width: 250px;
+    z-index: 1;
+}
