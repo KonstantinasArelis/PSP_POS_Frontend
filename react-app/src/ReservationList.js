@@ -39,6 +39,7 @@ const ReservationsList = ({reservations, onRefresh}) => {
         },
     ];
     */
+   
     const handleClick = (id) => {
         
         console.log("reservations with id: " + id + " was clicked");

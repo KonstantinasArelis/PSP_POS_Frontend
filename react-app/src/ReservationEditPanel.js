@@ -27,10 +27,6 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
     })
   };
 
-  
-  
-
-
   return (
     <div>
       <form className="reservationEditPanel" onSubmit={onSubmitHandle}>
@@ -114,7 +110,7 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
           onChange={(e) => Setservice_id(e.target.value)} 
         />
 
-        <button type="submit">Confirm edit</button>
+        <button type="submit" className="createReservationButton reservationEditSubmit">Confirm edit</button>
       </form>
     </div>
   );

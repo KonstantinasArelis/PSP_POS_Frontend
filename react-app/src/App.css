@@ -110,3 +110,43 @@
     width: 250px;
     z-index: 1;
 }
+
+.createReservationButton {
+    border: none;
+    background-color: #5776ff;
+    color: white;
+    font-size: 120%;
+    border-radius: 10px;
+    height: 40px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+.filterPanel {
+    background-color: #e6f2ff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.filterPanel input {
+    margin: 5px;
+    width: 200px;
+    border-radius: 10px;
+    border: none;
+}
+
+.createReservationButton.reservationFilterSubmit {
+    width: 10%;
+    height: 50%;
+}
+
+.createReservationButton.reservationEditSubmit {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 10%;
+}
