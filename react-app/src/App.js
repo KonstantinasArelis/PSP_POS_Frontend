@@ -9,7 +9,9 @@ import Surcharges from './Surcharges';
 import Taxes from './Taxes';
 import Discounts from './Discounts';
 import Users from './Users';
-import Orders from './Orders';
+import Orders from './Order/Orders';
+import OrderView from './Order/OrderView';
+import OrderItemView from './Order/OrderItemView';
 import CreateReservation from './CreateReservation';
 import './App.css';
 /*
@@ -69,8 +71,14 @@ function App() {
             <Route path="/Discounts">
               <Discounts />
             </Route>
-            <Route path="/Orders">
+            <Route exact path="/Orders">
               <Orders />
+            </Route>
+            <Route exact path="/Orders/:id">
+              <OrderView />
+            </Route>
+            <Route path="/Orders/:orderId/Item/:itemId">
+              <OrderItemView />
             </Route>
             <Route path="/CreateReservation">
               <CreateReservation />
