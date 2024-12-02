@@ -21,7 +21,7 @@ const CreateReservation = () => {
         e.preventDefault();
         setIsPending2(true);
 
-        const reservation = {id, business_id, employee_id, client_name, client_phone, created_at, last_modified, appointment_time, duration, reservationStatus, service_id};
+        const reservation = {client_name, client_phone, appointment_time, duration, service_id};
         fetch('http://localhost:5274/Reservation', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
@@ -40,83 +40,36 @@ const CreateReservation = () => {
         <div className="CreateReservation">
         <h2>Create Reservation: </h2>
             <form onSubmit={handleSubmit}>
-                <label>id:</label>
-                    <input
-                        type="text"
-                        required
-                        value={id}
-                        onChange={(e) => SetId(e.target.value)}
-                    ></input>
-                <label>business_id:</label>
-                    <input
-                        type="text"
-                        required
-                        value={business_id}
-                        onChange={(e) => SetBusiness_id(e.target.value)}
-                    ></input>
-                <label>employee_id:</label>
-                    <input
-                        type="text"
-                        required
-                        value={employee_id}
-                        onChange={(e) => SetEmployee_id(e.target.value)}
-                    ></input>
                 <label>client_name:</label>
                     <input
                         type="text"
-                        required
                         value={client_name}
                         onChange={(e) => SetClient_name(e.target.value)}
                     ></input>
                 <label>client_phone:</label>
                     <input
                         type="text"
-                        required
                         value={client_phone}
                         onChange={(e) => SetClient_phone(e.target.value)}
                     ></input>
-                <label>created_at:</label>
-                    <input
-                        type="text"
-                        required
-                        value={created_at}
-                        onChange={(e) => SetCreated_at(e.target.value)}
-                    ></input>
-                <label>last_modified:</label>
-                    <input
-                        type="text"
-                        required
-                        value={last_modified}
-                        onChange={(e) => SetLast_modified(e.target.value)}
-                    ></input>
                 <label>appointment_time:</label>
                     <input
-                        type="text"
-                        required
+                        type="datetime-local"
                         value={appointment_time}
                         onChange={(e) => SetAppointment_time(e.target.value)}
                     ></input>
                 <label>duration:</label>
                     <input
                         type="text"
-                        required
                         value={duration}
                         onChange={(e) => SetDuration(e.target.value)}
-                    ></input>
-                <label>ReservationStatus:</label>
-                    <input
-                        type="text"
-                        required
-                        value={reservationStatus}
-                        onChange={(e) => SetReservationStatus(e.target.value)}
                     ></input>
                 <label>service_id:</label>
                     <input
                         type="text"
-                        required
                         value={service_id}
                         onChange={(e) => SetService_id(e.target.value)}
-                    ></input>
+                ></input>
                 {!isPending2 && <button className='createReservationButton'>Add Reservation</button>}
                 {isPending2 && <button disabled> Adding...</button>}
             </form>
