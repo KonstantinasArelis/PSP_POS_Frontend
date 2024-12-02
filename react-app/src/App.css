@@ -150,3 +150,9 @@
     width: 30%;
     height: 10%;
 }
+
+.CreateReservation input{
+    background-color: rgb(206, 217, 255);
+    border: none;
+    border-radius: 10px;
+}
