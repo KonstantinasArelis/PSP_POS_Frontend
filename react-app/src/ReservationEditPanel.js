@@ -22,13 +22,10 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
         body: JSON.stringify(updatedReservation)
     }).catch(err => {
         console.log("error updating reservation: " + err.name);
+    }).then(() => {
+      onRefresh();
     })
-    onRefresh();
   };
-
-  
-  
-
 
   return (
     <div>
@@ -113,7 +110,7 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
           onChange={(e) => Setservice_id(e.target.value)} 
         />
 
-        <button type="submit">Confirm edit</button>
+        <button type="submit" className="createReservationButton reservationEditSubmit">Confirm edit</button>
       </form>
     </div>
   );

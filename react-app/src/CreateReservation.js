@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useFetch from "./useFetch";
+import "./App.css";
 
 const CreateReservation = () => {
 
@@ -116,7 +117,7 @@ const CreateReservation = () => {
                         value={service_id}
                         onChange={(e) => SetService_id(e.target.value)}
                     ></input>
-                {!isPending2 && <button> Add Reservation</button>}
+                {!isPending2 && <button className='createReservationButton'>Add Reservation</button>}
                 {isPending2 && <button disabled> Adding...</button>}
             </form>
         </div>
