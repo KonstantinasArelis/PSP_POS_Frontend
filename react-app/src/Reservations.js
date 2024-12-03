@@ -49,7 +49,7 @@ const Reservations = () => {
             <h2>Reservations:</h2>
             {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
-            {/*reservations && */ <ReservationsList reservations={reservations} onRefresh={handleRefresh}></ReservationsList>}
+            {reservations && <ReservationsList reservations={reservations} onRefresh={handleRefresh}></ReservationsList>}
         </div>
     );
 }

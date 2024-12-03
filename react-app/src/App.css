@@ -156,3 +156,13 @@
     border: none;
     border-radius: 10px;
 }
+
+.singleBusiness {
+    background-color: rgb(206, 217, 255);
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.singleBusiness p{
+    margin: 10px;
+}

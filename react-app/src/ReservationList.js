@@ -8,7 +8,7 @@ import ReservationEditPanel from './ReservationEditPanel.js';
 const ReservationsList = ({reservations, onRefresh}) => {
     const [isPanelVisible, setIsPanelVisible] = useState(null);
 
-    
+    /*
     console.log(reservations);
     reservations = [
     {
@@ -38,7 +38,7 @@ const ReservationsList = ({reservations, onRefresh}) => {
           service_id: 'service101',
         },
     ];
-    
+    */
    
     const handleClick = (id) => {
         
@@ -61,7 +61,7 @@ const ReservationsList = ({reservations, onRefresh}) => {
                     <p className="reservationClientPhone">{reservation.client_phone}</p>
                     <p className="reservationAppointmentTime">{reservation.appointment_time}</p>
                     <p className="reservationDuration">{reservation.duration} <img id="icon"src={clock}/></p>
-                    <p className="reservationReservationStatus"> <img id="icon"src={status}/> {reservation.ReservationStatus}</p>
+                    <p className="reservationReservationStatus"> <img id="icon"src={status}/> {reservation.reservationStatus}</p>
                     <p className="reservationServiceId"> <img id="icon"src={service}/> {reservation.service_id}</p>
                     
                     {reservation.id === isPanelVisible && (
