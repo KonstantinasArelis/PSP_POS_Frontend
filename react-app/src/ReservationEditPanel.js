@@ -11,7 +11,6 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
   const [duration, Setduration] = useState(reservation.duration);
   const [ReservationStatus, SetReservationStatus] = useState(reservation.ReservationStatus);
 
-  //TO-DO make it so the componenets rerender once the patch has been made to a reservation
   const onSubmitHandle = (e) => {
     e.preventDefault();
     const updatedReservation = {business_id, employee_id, client_name, client_phone, service_id, appointment_time, duration, ReservationStatus};
