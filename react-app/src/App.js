@@ -3,7 +3,7 @@ import Dashboard from './Dashboard';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NotFound from './NotFound';
 import Menu from './Menu';
-import Merchant from './Merchant';
+import Business from './Business/Business';
 import Reservations from './Reservations';
 import Surcharges from './Surcharges';
 import Taxes from './Taxes';
@@ -14,6 +14,7 @@ import OrderView from './Order/OrderView';
 import OrderItemView from './Order/OrderItemView';
 import CreateReservation from './CreateReservation';
 import './App.css';
+
 /*
 function OrderList() {
   const [orders, setOrders] = useState([]);
@@ -53,8 +54,8 @@ function App() {
             <Route path="/Menu">
               <Menu />
             </Route>
-            <Route path="/Merchant">
-              <Merchant />
+            <Route path="/Business">
+              <Business />
             </Route>
             <Route path="/Reservations">
               <Reservations />
