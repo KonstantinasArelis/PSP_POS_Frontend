@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import SingleBusiness from "./SingleBusiness";
+import CreateBusinessPanel from "./CreateBusinessPanel";
 
 const BusinessAdminUser = () => {
-    const [data,SetData] = useState(null);
+    const [data, SetData] = useState(null);
 
     const url = `http://localhost:5274/Business`;
     useEffect(() => {
@@ -21,9 +22,11 @@ const BusinessAdminUser = () => {
         })
     }, [])
 
+
     return(
         <div>
             <h2>Admin User Business View:</h2>
+            <CreateBusinessPanel/>
             {data && data.map(business => (
                 <div key={business.id}>
                     <SingleBusiness Business={business}/>
