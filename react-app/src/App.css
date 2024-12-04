@@ -166,3 +166,15 @@
 .singleBusiness p{
     margin: 10px;
 }
+
+.CreateReservation.CreateBusiness input{
+    margin: 5px;
+}
+
+.createReservationButton.CreateBusinessButton{
+
+}
+
+.businessList {
+    margin-top: 50px;
+}
