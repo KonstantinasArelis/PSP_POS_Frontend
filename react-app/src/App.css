@@ -178,3 +178,15 @@
 .businessList {
     margin-top: 50px;
 }
+
+.payment {
+    background-color: rgb(206, 217, 255);
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.payment p{
+    background-color: rgb(206, 217, 255);
+    border-radius: 20px;
+    margin: 10px;
+}
