@@ -14,6 +14,7 @@ import OrderView from './Order/OrderView';
 import OrderItemView from './Order/OrderItemView';
 import CreateReservation from './CreateReservation';
 import './App.css';
+import Payment from './Payment/Payment';
 
 /*
 function OrderList() {
@@ -83,6 +84,9 @@ function App() {
             </Route>
             <Route path="/CreateReservation">
               <CreateReservation />
+            </Route>
+            <Route path="/Payment/:id">
+              <Payment />
             </Route>
             <Route path="*">
               <NotFound/>

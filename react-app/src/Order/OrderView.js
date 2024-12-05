@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "../useFetch";
 import OrderItemsList from "./OrderItemsList";
 import NotFound from '../NotFound';
 import AddItem from "./AddItem";
-
 
 const OrderView = () => {
     console.log("loading orderview component");
@@ -28,7 +27,8 @@ const Order = ({props}) => {
     const [order, orderUrl] = props;
     const [status, setStatus] = useState(order.order_status);
     const [items, setItems] = useState(order.items);
-    
+    const history = useHistory();
+
     async function deleteYourself(){
         const response = await fetch(orderUrl, {method: "DELETE"});
         console.log(response.status);
@@ -43,6 +43,7 @@ const Order = ({props}) => {
         const response = await fetch(targetUrl, {method:"POST", body:payStatus, headers:headers});
         if(response.ok) setStatus("PENDING_PAYMENT");
         //TODO: payment handling goes here
+        history.push(`/Payment/${order.id}`);
     }
 
     async function addItem(item) {
