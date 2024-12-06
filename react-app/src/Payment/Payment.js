@@ -5,9 +5,12 @@ const Payment = () => {
     const {id} = useParams();
     const [amountToBePaid, setAmountToBePaid] = useState(0);
     const [payments, setPayments] = useState(null);
+    const [order, setOrder] = useState(null);
 
     const getUrl = `http://localhost:5274/Payment?order_id=${id}`;
     const postUrl = `http://localhost:5274/Payment`;
+    const orderGetUrl = `http://localhost:5274/Order/${id}`;
+
     const fetchPayments = () => {
         console.log("fetch payments now from " + getUrl);
         fetch(getUrl, {
@@ -21,7 +24,7 @@ const Payment = () => {
     }
 
     const makePayment = () => {
-        const newPayment = {total_amount: amountToBePaid, order_id: id};
+        const newPayment = {order_id: id, total_amount: amountToBePaid, order_amount: null, tip_amount: 2.13, payment_method: 0, gift_card_id: null};
         fetch(postUrl, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -35,23 +38,23 @@ const Payment = () => {
         })
     }
 
+    const fetchOrder = () => {
+        fetch(orderGetUrl, {
+            method: "GET"
+        }).then( (response) => response.json())
+        .then( (data) => {
+            console.log("got: " + data);
+            setOrder(data);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     useEffect(() => {
+        fetchOrder();
         fetchPayments();
     }, [])
 
-    const order = 
-        {
-          id: 1,
-          business_id: 10,
-          employee_id: 5,
-          order_discount_percentage: 10.00,
-          total_amount: 100.00,
-          tax_amount: 6.00,
-          total_discount_amount: 10.00,
-          order_status: "completed",
-          created_at: "2023-10-26T10:00:00Z", 
-          closed_at: "2023-10-26T11:00:00Z" 
-        }
     
     const handlePay = (e) => {
         e.preventDefault();
@@ -61,9 +64,13 @@ const Payment = () => {
 
     return (
         <div>
-            <h2>Total Amount: {order.total_amount}</h2>
-            <h2>Tax Amount: {order.tax_amount}</h2>
-            <h2>Discount Amount: {order.total_discount_amount}</h2>
+            {order && 
+            <div>
+                <h2>Total Amount: {order.total_amount}</h2>
+                <h2>Tax Amount: {order.tax_amount}</h2>
+                <h2>Discount Amount: {order.total_discount_amount}</h2>
+            </div>}
+            
             <div>Create new payment: </div>
             <form>
                 <input
