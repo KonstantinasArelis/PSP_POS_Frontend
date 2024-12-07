@@ -21,3 +21,21 @@ div.column2 {
     width: 20%;
     display: inline-block;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    border-color: black;
+    border: 1px solid;
+}
+
+thead {
+    background-color: #f0f0f0;
+}
+
+.wideColumn {
+    width: 100%;
+}

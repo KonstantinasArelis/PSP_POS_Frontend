@@ -16,7 +16,7 @@ const DiscountViewInput = ( {onChange}) => {
     
     const HandleSubmit = (e) => {
         e.preventDefault();
-        console.log("reservation filtering is firing of");
+        console.log("discount filtering is firing of");
         SetIsPending(true);
 
         const paramaters = {page_nr: page_nr, limit: limit, id: id, type: type, valid_starting_from: valid_starting_from,
@@ -31,7 +31,7 @@ const DiscountViewInput = ( {onChange}) => {
 
         SetIsPending(false);
         onChange(querryParamaters);
-        //useFetch('http://localhost:5274/Reservation?${querryParamaters}');
+        //useFetch('http://localhost:5274/Discount?${querryParamaters}');
     }
 
 
