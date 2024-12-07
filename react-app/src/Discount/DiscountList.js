@@ -28,19 +28,20 @@ const Discount = ({props}) => {
         console.log("done");
     }
     
-    return(existent ? // should I specify business_id and product_id???
+    return(existent ? // should I specify business_id and product_id??? //deleted "<Link to={"/Discounts/" + discount.id}><button>open</button></Link>" after <div className="column2">
         <div className="discount">
             <div className="column1">
-                <p>id: {discount.id}</p>
-                <p>discount type: {discount.discount_type}</p>
-                <p>amount: {discount.amount}</p>
-                <p>discount percantage: {discount.discount_percantage}</p>
-                <p>valid from: {new Date(discount.valid_from).toLocaleDateString("LT")}</p>
-                <p>valid untill: {new Date(discount.valid_until).toLocaleDateString("LT")}</p>
-                <p>code hash: {discount.code_hash}</p>
+                <p>id: {discount.id ?? "null"}</p>
+                <p>business id: {discount.business_id ?? "null"}</p>
+                <p>product id: {discount.product_id ?? "null"}</p>
+                <p>discount type: {discount.discount_type ?? "null"}</p>
+                <p>amount: {discount.amount ?? "null"}</p>
+                <p>discount percentage: {discount.discount_percentage ?? "null"}</p>
+                <p>valid from: {discount.valid_from ? new Date(discount.valid_from).toLocaleDateString("LT") : "null"}</p>
+                <p>valid until: {discount.valid_until ? new Date(discount.valid_until).toLocaleDateString("LT") : "null"}</p>
+                <p>code hash: {discount.code_hash ?? "null"}</p>
             </div>
             <div className="column2">
-                <Link to={"/Discounts/" + discount.id}><button>open</button></Link>
                 <button onClick={() => deleteDiscount()}>delete</button>
             </div>
         </div> 

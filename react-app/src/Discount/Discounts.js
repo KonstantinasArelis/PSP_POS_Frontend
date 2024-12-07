@@ -27,9 +27,8 @@ const Discounts = () => {
         }
     }
 
-    return(
+    return( // deleted "<button onClick={createDiscount}>Create Discount</button>" after <div>
         <div>
-            <button onClick={createDiscount}>Create Discount</button>
             <h2>Discounts:</h2>
             <DiscountViewInput onChange={handleUrlChange}></DiscountViewInput>
             {error && <div>{error}</div>}
