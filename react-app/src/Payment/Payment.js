@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 const Payment = () => {
     const {id} = useParams();
     const [amountToBePaid, setAmountToBePaid] = useState(0);
+    const [tipAmount, setTipAmount] = useState(0);
+    const [paymentMethod, setPaymentMethod] = useState(null);
     const [payments, setPayments] = useState(null);
     const [order, setOrder] = useState(null);
+    const [giftCardId, setGiftCardId] = useState(null);
 
     const getUrl = `http://localhost:5274/Payment?order_id=${id}`;
     const postUrl = `http://localhost:5274/Payment`;
@@ -24,7 +27,22 @@ const Payment = () => {
     }
 
     const makePayment = () => {
-        const newPayment = {order_id: id, total_amount: amountToBePaid, order_amount: null, tip_amount: 2.13, payment_method: 0, gift_card_id: null};
+
+        const newPayment = {order_id: id, total_amount: amountToBePaid, order_amount: null, tip_amount: tipAmount, payment_method: paymentMethod, gift_card_id: null};
+
+        /*
+        const newPayment = { 
+            newPayment: { // Wrap the data in a 'newPayment' object
+                order_id: id, 
+                total_amount: amountToBePaid, 
+                order_amount: null, 
+                tip_amount: 2.13, 
+                payment_method: "CASH",  
+                gift_card_id: null
+            } 
+        };
+        */
+
         fetch(postUrl, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -80,6 +98,27 @@ const Payment = () => {
                     value={amountToBePaid}
                     onChange={(e) => setAmountToBePaid(e.target.value)}
                 ></input>
+                <input
+                    placeholder="Tip"
+                    type="number"
+                    step="0.01"
+                    value={tipAmount}
+                    onChange={(e) => setTipAmount(e.target.value)}
+                ></input>
+                <select id="paymentMethodDropdown" onChange={ (e) => setPaymentMethod(e.target.value)}>
+                    <option value = "CASH" > CASH</option>
+                    <option value = "CARD" > CARD</option>
+                    <option value = "GIFTCARD" > GIFT CARD</option>
+                </select>
+                { paymentMethod === "GIFTCARD" && (
+                    <input
+                    placeholder="Gift Card Id"
+                    type="number"
+                    step="1"
+                    value={giftCardId}
+                    onChange={(e) => setGiftCardId(e.target.value)}
+                    ></input>
+                )}
                 <button onClick={handlePay}>Pay</button>
             </form>
             <h3>Payments for this order: </h3>
