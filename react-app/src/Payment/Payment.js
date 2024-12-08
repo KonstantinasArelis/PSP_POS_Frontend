@@ -30,19 +30,6 @@ const Payment = () => {
 
         const newPayment = {order_id: id, total_amount: amountToBePaid, order_amount: null, tip_amount: tipAmount, payment_method: paymentMethod, gift_card_id: null};
 
-        /*
-        const newPayment = { 
-            newPayment: { // Wrap the data in a 'newPayment' object
-                order_id: id, 
-                total_amount: amountToBePaid, 
-                order_amount: null, 
-                tip_amount: 2.13, 
-                payment_method: "CASH",  
-                gift_card_id: null
-            } 
-        };
-        */
-
         fetch(postUrl, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
