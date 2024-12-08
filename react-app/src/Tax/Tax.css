@@ -1,0 +1,41 @@
+div.tax {
+    border-width: 1px;
+    border-radius: 30px;
+    border-color: f6f6f6;
+    border-style: solid;
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+button {
+    float: right;
+}
+
+div.column1 {
+    width: 80%;
+    display: inline-block;
+}
+
+div.column2 {
+    width: 20%;
+    display: inline-block;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    border-color: black;
+    border: 1px solid;
+}
+
+thead {
+    background-color: #f0f0f0;
+}
+
+.wideColumn {
+    width: 100%;
+}

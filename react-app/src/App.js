@@ -5,7 +5,7 @@ import NotFound from './NotFound';
 import Menu from './Menu';
 import Merchant from './Merchant';
 import Reservations from './Reservations';
-import Taxes from './Taxes';
+import Taxes from './Tax/Taxes';
 import Discounts from './Discount/Discounts';
 import DiscountView from './Discount/DiscountView';
 import Users from './Users';

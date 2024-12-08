@@ -1,7 +1,6 @@
 import DiscountList from "./DiscountList";
 import DiscountViewInput from "./DiscountViewInput";
 import useFetch from "../useFetch";
-import {Link} from "react-router-dom";
 import {useState } from "react";
 
 const Discounts = () => {

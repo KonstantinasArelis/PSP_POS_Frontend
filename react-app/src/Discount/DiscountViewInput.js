@@ -65,7 +65,7 @@ const DiscountViewInput = ( {onChange}) => {
             });
     
             if (response.ok) {
-                const createdDiscount = await response.json();
+                //const createdDiscount = await response.json();
                 //window.location.href = window.location.href + "/" + createdDiscount.id;
                 window.location.reload();
             } else {
