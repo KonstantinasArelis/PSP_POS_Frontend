@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
+import { useHistory} from "react-router-dom/cjs/react-router-dom.min";
 
 const ReservationEditPanel = ({ reservation, onRefresh}) => {
   const [business_id, Setbusiness_id] = useState(reservation.business_id);
@@ -10,10 +11,11 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
   const [appointment_time, Setappointment_time] = useState(reservation.appointment_time);
   const [duration, Setduration] = useState(reservation.duration);
   const [ReservationStatus, SetReservationStatus] = useState(reservation.ReservationStatus);
+  const history = useHistory();
 
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    const updatedReservation = {business_id, employee_id, client_name, client_phone, service_id, appointment_time, duration, ReservationStatus};
+    const updatedReservation = {business_id, employee_id, client_name, client_phone, service_id, appointment_time, duration, ReservationStatus: ReservationStatus};
     const url = `http://localhost:5274/Reservation/${reservation.id}`;
     fetch(url, {
         method: 'PATCH',
@@ -26,19 +28,15 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
     })
   };
 
+  const handleCancelReservation = (e) => {
+    e.preventDefault();
+    SetReservationStatus("CANCELLED");
+    onSubmitHandle(e);
+  }
+  
   return (
     <div>
       <form className="reservationEditPanel" onSubmit={onSubmitHandle}>
-        <label htmlFor="business_id">business_id:</label>
-        <input 
-          type="text" 
-          id="business_id" 
-          name="business_id" 
-          className="reservationEditInput" 
-          value={business_id} 
-          onChange={(e) => Setbusiness_id(e.target.value)} 
-        />
-
         <label htmlFor="employee_id">employee_id:</label>
         <input 
           type="text" 
@@ -89,16 +87,6 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
           onChange={(e) => Setduration(e.target.value)} 
         />
 
-        <label htmlFor="ReservationStatus">Status:</label>
-        <input 
-          type="text" 
-          id="ReservationStatus" 
-          name="ReservationStatus" 
-          className="reservationEditInput" 
-          value={ReservationStatus} 
-          onChange={(e) => SetReservationStatus(e.target.value)} 
-        />
-
         <label htmlFor="service_id">service_id:</label>
         <input 
           type="text" 
@@ -110,6 +98,7 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
         />
 
         <button type="submit" className="createReservationButton reservationEditSubmit">Confirm edit</button>
+        <button className="createReservationButton reservationEditSubmit" onClick={handleCancelReservation}>Cancel Reservation</button>
       </form>
     </div>
   );
