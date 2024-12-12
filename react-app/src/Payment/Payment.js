@@ -5,7 +5,7 @@ const Payment = () => {
     const {id} = useParams();
     const [amountToBePaid, setAmountToBePaid] = useState(0);
     const [tipAmount, setTipAmount] = useState(0);
-    const [paymentMethod, setPaymentMethod] = useState(null);
+    const [paymentMethod, setPaymentMethod] = useState("CASH");
     const [payments, setPayments] = useState(null);
     const [order, setOrder] = useState(null);
     const [giftCardId, setGiftCardId] = useState(null);

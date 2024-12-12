@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 
 const Reservations = () => {
     //const { error, isPending, data: reservations } = useFetch('http://localhost:5274/order?employee_id=123&min_total_amount=50&max_total_amount=1000&order_status=OPEN&page_nr=0&limit=25')
-    const [url, SetUrl] = useState("http://localhost:5274/Reservation");
+    const [url, SetUrl] = useState("http://localhost:5274/Reservation?status=RESERVED");
     const [refreshTrigger, SetRefreshTrigger] = useState(0);
     const [isFilterPanelVisible, SetIsFilterPanelVisible] = useState(false);
 

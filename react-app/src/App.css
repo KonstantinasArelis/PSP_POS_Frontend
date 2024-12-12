@@ -137,6 +137,13 @@
     border: none;
 }
 
+.filterPanel select {
+    margin: 5px;
+    width: 200px;
+    border-radius: 10px;
+    border: none;
+}
+
 .createReservationButton.reservationFilterSubmit {
     width: 10%;
     height: 50%;
