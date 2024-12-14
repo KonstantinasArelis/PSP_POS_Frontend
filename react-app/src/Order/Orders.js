@@ -17,7 +17,7 @@ const Orders = () => {
     async function createOrder(){
         var order = newOrder;
         order.employee_id = userId;
-        var serializedOrder = JSON.stringify(JSON.stringify(order));
+        var serializedOrder = JSON.stringify(order);
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
         console.log(serializedOrder);
@@ -51,7 +51,7 @@ const newOrder = {
     order_status:"OPEN",
     created_at: new Date(),
     closed_at:null,
-    items:null
-}
+    items:[]
+};
 
 export default Orders;

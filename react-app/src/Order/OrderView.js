@@ -16,6 +16,7 @@ const OrderView = () => {
     function rerender(){
         setRerenderer(oldValue => oldValue + 1);
     }
+    
     return(
         <div>
             {error && <NotFound/>}
@@ -36,7 +37,7 @@ const Order = ({props}) => {
 
     async function proceedToPay(){
         const targetUrl = orderUrl + "/status";
-        const payStatus = JSON.stringify(JSON.stringify({status:"PENDING_PAYMENT"}));
+        const payStatus = JSON.stringify({status:"PENDING_PAYMENT"});
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
         const response = await fetch(targetUrl, {method:"POST", body:payStatus, headers:headers});
