@@ -32,7 +32,7 @@ const Orders = () => {
         <div>
             <button onClick={createOrder}>Create Order</button>
             <h2>Orders:</h2>
-            <OrderViewInput onChange={handleUrlChange}></OrderViewInput>
+            <OrderViewInput props={[handleUrlChange, userId]}></OrderViewInput>
             {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
             {orders && <OrderList props={[orders, "http://localhost:5274/Order/"]}></OrderList>}
