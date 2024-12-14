@@ -41,6 +41,7 @@ const Discounts = () => {
 const newDiscount = {
     business_id:null, 
     product_id:null, 
+    discount_name:null, 
     discount_type:null, 
     amount:0, 
     discount_percantage:0, 

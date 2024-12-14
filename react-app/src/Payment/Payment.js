@@ -5,7 +5,7 @@ const Payment = () => {
     const {id} = useParams();
     const [amountToBePaid, setAmountToBePaid] = useState(0);
     const [tipAmount, setTipAmount] = useState(0);
-    const [paymentMethod, setPaymentMethod] = useState(null);
+    const [paymentMethod, setPaymentMethod] = useState("CASH");
     const [payments, setPayments] = useState(null);
     const [order, setOrder] = useState(null);
     const [giftCardId, setGiftCardId] = useState(null);
@@ -14,6 +14,9 @@ const Payment = () => {
     const postUrl = `http://localhost:5274/Payment`;
     const orderGetUrl = `http://localhost:5274/Order/${id}`;
 
+    const [totalPaid, SetTotalPaid] = useState(0);
+    const [totalTip, SetTotalTip] = useState(0);
+
     const fetchPayments = () => {
         console.log("fetch payments now from " + getUrl);
         fetch(getUrl, {
@@ -21,11 +24,12 @@ const Payment = () => {
         }).then((response) => response.json())
         .then((data) => {
             setPayments(data);
+
         }).catch((error) => {
             console.log(error);
         })
-    }
 
+    }
     const makePayment = () => {
 
         const newPayment = {order_id: id, total_amount: amountToBePaid, order_amount: null, tip_amount: tipAmount, payment_method: paymentMethod, gift_card_id: null};
@@ -60,7 +64,29 @@ const Payment = () => {
         fetchPayments();
     }, [])
 
-    
+    useEffect(() => {
+        let totalPaid = 0;
+            if(payments != null){
+                for(const payment of payments){
+                    console.log(payment);
+                    totalPaid += payment.total_amount;
+                }
+            }
+
+        SetTotalPaid(Math.round(totalPaid * 100) / 100);
+
+        let totalTip = 0;
+            if(payments != null){
+                for(const payment of payments){
+                    console.log(payment);
+                    totalTip += payment.tip_amount;
+                }
+            }
+
+        SetTotalTip(Math.round(totalTip * 100) / 100);
+    }, [payments])
+
+
     const handlePay = (e) => {
         e.preventDefault();
         console.log("paid: " + amountToBePaid);
@@ -71,9 +97,13 @@ const Payment = () => {
         <div>
             {order && 
             <div>
-                <h2>Total Amount: {order.total_amount}</h2>
-                <h2>Tax Amount: {order.tax_amount}</h2>
-                <h2>Discount Amount: {order.total_discount_amount}</h2>
+                <h3>Order Status: {order.order_status}</h3>
+                <h3>Tax Amount: {order.tax_amount}</h3>
+                <h3>Discount Amount: {order.total_discount_amount}</h3>
+                <h3>Tips: {totalTip}</h3>
+                <h2>Total: {order.total_amount}</h2>
+                <h2>Paid: {totalPaid}</h2>
+                <h2>Left To Pay: {order.total_amount-totalPaid}</h2>
             </div>}
             
             <div>Create new payment: </div>

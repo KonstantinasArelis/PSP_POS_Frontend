@@ -188,6 +188,12 @@ const ReservationFilterPanel = ({ onChange, SetIsFilterPanelVisible }) => {
           placeholder="Enter status"
         />
 
+        <select onChange={ (e) => Setstatus(e.target.value)}>
+            <option value = "RESERVERD" > RESERVERD</option>
+            <option value = "CANCELLED" > CANCELLED</option>
+            <option value = "DONE" > DONE</option>
+        </select>
+
         <input
           type="text"
           id="service_id"

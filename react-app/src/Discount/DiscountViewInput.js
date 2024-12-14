@@ -10,6 +10,7 @@ const DiscountViewInput = ( {onChange}) => {
     const [id, Setid] = useState('');
     const [business_id, Setbusiness_id] = useState('');
     const [product_id, Setproduct_id] = useState('');
+    const [discount_name, Setdiscount_name] = useState('');
     const [discount_type, Setdiscount_type] = useState('');
     const [amount, Setamount] = useState('');
     const [discount_percentage, Setdiscount_percentage] = useState('');
@@ -44,6 +45,7 @@ const DiscountViewInput = ( {onChange}) => {
         const newDiscount = {
             business_id: business_id || null,
             product_id: product_id || null,
+            discount_name: discount_name || null,
             discount_type: discount_type || null,
             amount: amount || null,
             discount_percentage: discount_percentage || null,
@@ -95,6 +97,13 @@ const DiscountViewInput = ( {onChange}) => {
     return(
         <div>
             <form onSubmit={handleSubmit}>
+                <label>Discount Name:</label>
+                <input
+                    type="text"
+                    value={discount_name}
+                    onChange={(e) => Setdiscount_name(e.target.value)}
+                /><br/>
+
                 <label>Business ID:</label>
                 <input
                     type="number"
@@ -114,14 +123,14 @@ const DiscountViewInput = ( {onChange}) => {
                 /><br/>
 
                 <label>Discount Type:</label>
-                <input
-                    type="number"
-                    step="1"
-                    min="0"
-                    max="2"
+                <select
                     value={discount_type}
                     onChange={(e) => Setdiscount_type(e.target.value)}
-                /><br/>
+                >
+                    <option value="ORDER">ORDER</option>
+                    <option value="ORDER_ITEM">ORDER_ITEM</option>
+                    <option value="PRODUCT">PRODUCT</option>
+                </select><br/>
 
                 <label>Amount:</label>
                 <input
@@ -137,6 +146,7 @@ const DiscountViewInput = ( {onChange}) => {
                     type="number"
                     step="0.01"
                     min="0"
+                    max="100"
                     value={discount_percentage}
                     onChange={(e) => Setdiscount_percentage(e.target.value)}
                 /><br/>
