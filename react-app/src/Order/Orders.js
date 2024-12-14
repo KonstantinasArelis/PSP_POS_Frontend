@@ -17,7 +17,7 @@ const Orders = () => {
     async function createOrder(){
         var order = newOrder;
         order.employee_id = userId;
-        var serializedOrder = JSON.stringify(JSON.stringify(order));
+        var serializedOrder = JSON.stringify(order);
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
         console.log(serializedOrder);
@@ -32,7 +32,7 @@ const Orders = () => {
         <div>
             <button onClick={createOrder}>Create Order</button>
             <h2>Orders:</h2>
-            <OrderViewInput onChange={handleUrlChange}></OrderViewInput>
+            <OrderViewInput props={[handleUrlChange, userId]}></OrderViewInput>
             {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
             {orders && <OrderList props={[orders, "http://localhost:5274/Order/"]}></OrderList>}
@@ -51,7 +51,7 @@ const newOrder = {
     order_status:"OPEN",
     created_at: new Date(),
     closed_at:null,
-    items:null
-}
+    items:[]
+};
 
 export default Orders;
