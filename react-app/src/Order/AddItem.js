@@ -44,9 +44,7 @@ const ProductSelect = ({props}) => {
         if(!isNaN(quantity) && product != 0){
             const selectedProduct = fetchedProducts.find(p => p.id == product);
             const newItem = {
-                order_id:null, product_id:product, quantity:quantity, variations:"[]", 
-                product_name:selectedProduct.name, product_price:selectedProduct.price,
-                variation_price:0, item_discount_amount:0
+                order_id:null, product_id:product, quantity:quantity, variations:[]
             };
             addItem(newItem);
         }

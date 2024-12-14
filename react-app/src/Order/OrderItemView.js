@@ -29,6 +29,7 @@ const Item = ({props}) => {
     const variations = JSON.parse(item.variations);
     const [quantity, setQuantity] = useState(item.quantity);
     const [variationList, setVariationList] = useState(variations);
+    const [variationPrice, setVariationPrice] = useState(item.variation_price);
     var variationIndex = 0;
     console.log(variationList);
     
@@ -49,6 +50,7 @@ const Item = ({props}) => {
         const isOk = await updateItem(quantity, newVariationList);
         if(isOk){
             setVariationList(newVariationList);
+            setVariationPrice(variationPrice + variation.price);
             console.log("setting vars " + JSON.stringify(variationList));
         } 
     }
@@ -60,7 +62,10 @@ const Item = ({props}) => {
             const newVariationList = structuredClone(variationList);
             newVariationList.splice(index, 1);
             const isOk = await updateItem(quantity, newVariationList);
-            if(isOk) setVariationList(newVariationList);
+            if(isOk){
+                setVariationList(newVariationList);
+                setVariationPrice(variationPrice + variation.price);
+            }
         }
         else console.log("not foung");
     }
@@ -85,7 +90,7 @@ const Item = ({props}) => {
                 <p>product name: {item.product_name}</p>
                 <p>product price: {item.product_price}</p>
                 <p>discount amount: {item.item_discount_amount}</p>
-                <p>variation price: {item.variation_price}</p>
+                <p>variation price: {variationPrice}</p>
             </div>
             { order.order_status != "CLOSED" &&
                 <div>
