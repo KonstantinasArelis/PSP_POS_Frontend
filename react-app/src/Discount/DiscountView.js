@@ -29,6 +29,7 @@ const Discount = ({props}) => {
                 <p>id: {discount.id}</p>
                 <p>business id: {discount.business_id}</p>
                 <p>product id: {discount.product_id}</p>
+                <p>discount name: {discount.discount_name}</p>
                 <p>discount type: {discount.discount_type}</p>
                 <p>amount: {discount.amount}</p>
                 <p>discount percentage: {discount.discount_percentage}</p>

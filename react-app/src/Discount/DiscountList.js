@@ -34,6 +34,7 @@ const Discount = ({props}) => {
                 <p>id: {discount.id ?? "null"}</p>
                 <p>business id: {discount.business_id ?? "null"}</p>
                 <p>product id: {discount.product_id ?? "null"}</p>
+                <p>discount name: {discount.discount_name ?? "null"}</p>
                 <p>discount type: {discount.discount_type ?? "null"}</p>
                 <p>amount: {discount.amount ?? "null"}</p>
                 <p>discount percentage: {discount.discount_percentage ?? "null"}</p>
