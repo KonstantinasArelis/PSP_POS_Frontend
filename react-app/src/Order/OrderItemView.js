@@ -13,7 +13,7 @@ const OrderItemView = () => {
     const itemUrl = apiurl + params.orderId + "/orderItem/" + params.itemId;
     const orderUrl = apiurl + params.orderId;
     const { error, isPending, data: item } = useFetch(itemUrl, rerenderer);
-    const { errorO, isPendingO, data: order } = useFetch(orderUrl, rerenderer);
+    const { errorO, isPendingO, data: order } = useFetch(orderUrl);
 
     function rerender(){
         setRerenderer(oldValue => oldValue + 1);
@@ -64,7 +64,7 @@ const Item = ({props}) => {
 
     async function updateItem(newQuantity, newVariationList) {
         const updateObject = {quantity:newQuantity, variations:newVariationList};
-        const body = JSON.stringify(JSON.stringify(updateObject));
+        const body = JSON.stringify(updateObject);
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
         const response = await fetch(itemUrl, {method:"PATCH", body:body, headers:headers});
