@@ -1,20 +1,3 @@
-// import Navbar from './Navbar';
-// import Dashboard from './Dashboard';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import NotFound from './NotFound';
-// import Menu from './Menu';
-// import Business from './Business/Business';
-// import Reservations from './Reservations';
-// import Taxes from './Tax/Taxes';
-// import Discounts from './Discount/Discounts';
-// import DiscountView from './Discount/DiscountView';
-// import Users from './Users';
-// import Orders from './Order/Orders';
-// import OrderView from './Order/OrderView';
-// import OrderItemView from './Order/OrderItemView';
-// import CreateReservation from './CreateReservation';
-// import './App.css';
-// import Payment from './Payment/Payment';
 
 /*
 function OrderList() {
@@ -39,61 +22,6 @@ function OrderList() {
   );
 }
 */
-
-// function App() {
-//   //window.electronAPI.doThing();
-//   console.log("hello from app.js")
-//   return (
-//     <Router>
-//       <div className="App" >
-//         <Navbar />
-//         <div className="content">
-//           <Switch>
-//             <Route exact path="/">
-//               <Dashboard />
-//             </Route>
-//             <Route path="/Menu">
-//               <Menu />
-//             </Route>
-//             <Route path="/Business">
-//               <Business />
-//             </Route>
-//             <Route path="/Reservations">
-//               <Reservations />
-//             </Route>
-//             <Route path="/Users">
-//               <Users />
-//             </Route>
-//             <Route path="/Taxes">
-//               <Taxes />
-//             </Route>
-//             <Route exact path="/Discounts">
-//               <Discounts />
-//             </Route>
-//             <Route exact path="/Orders">
-//               <Orders />
-//             </Route>
-//             <Route exact path="/Orders/:id">
-//               <OrderView />
-//             </Route>
-//             <Route path="/Orders/:orderId/Item/:itemId">
-//               <OrderItemView />
-//             </Route>
-//             <Route path="/CreateReservation">
-//               <CreateReservation />
-//             </Route>
-//             <Route path="/Payment/:id">
-//               <Payment />
-//             </Route>
-//             <Route path="*">
-//               <NotFound/>
-//             </Route>
-//           </Switch>
-//         </div>
-//       </div>
-//     </Router>
-//   );
-// }
 
 import Navbar from './Navbar';
 import Dashboard from './Dashboard';
@@ -123,7 +51,7 @@ function App() {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem("authToken"); // Remove auth token on logout
+        localStorage.removeItem("authToken");
         setIsAuthenticated(false);
     };
 
@@ -134,7 +62,7 @@ function App() {
                     <>
                         <Navbar onLogout={handleLogout} />
                         <div className="content">
-                            <Switch>  {/* Use Switch here */}
+                            <Switch>  
                                 <Route exact path="/" component={Dashboard} />
                                 <Route path="/Menu" component={Menu} />
                                 <Route path="/Business" component={Business} />
@@ -147,12 +75,12 @@ function App() {
                                 <Route path="/Orders/:orderId/Item/:itemId" component={OrderItemView} />
                                 <Route path="/CreateReservation" component={CreateReservation} />
                                 <Route path="/Payment/:id" component={Payment} />
-                                <Route component={NotFound} />  {/* This is the 404 route */}
+                                <Route component={NotFound} /> 
                             </Switch>
                         </div>
                     </>
                 ) : (
-                    <Login onLogin={handleLogin} /> // Show Login component when not authenticated
+                    <Login onLogin={handleLogin} /> 
                 )}
             </div>
         </Router>
