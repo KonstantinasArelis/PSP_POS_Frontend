@@ -28,6 +28,14 @@ const OrderView = () => {
 
 const Order = ({props}) => {
     const [order, orderUrl, rerender] = props;
+    const [status, setStatus] = useState(order.order_status);
+    const [items, setItems] = useState(order.items);    
+    const [showDiscountSelect, setShowDiscountSelect] = useState(false);
+    const [discounts, setDiscounts] = useState([]);
+    const [selectedDiscount, setSelectedDiscount] = useState(null);
+    const [showCodeField, setShowCodeField] = useState(false);
+    const [codeHash, setCodeHash] = useState("");
+
     const history = useHistory();
 
     async function deleteYourself(){
@@ -46,6 +54,68 @@ const Order = ({props}) => {
         }
         //TODO: payment handling goes here
         history.push(`/Payment/${order.id}`);
+    }
+
+    async function showDiscountNames(){
+        if (showDiscountSelect) {
+            setShowDiscountSelect(false);
+            setSelectedDiscount(null);  
+            setShowCodeField(false);   
+        } 
+        else {
+            const response = await fetch("http://localhost:5274/Discount");
+            if (response.ok) {
+                const allDiscounts = await response.json();
+                const orderDiscounts = allDiscounts.filter(discount => discount.discount_type === "ORDER");
+                setDiscounts(orderDiscounts);
+                setShowDiscountSelect(true);
+            }
+        }
+    }
+
+    function applySelectedDiscount() {
+        if (selectedDiscount) {
+            setShowCodeField(true);
+        }
+    }
+
+    async function validateCodeHash() {
+        if (selectedDiscount && codeHash === selectedDiscount.code_hash) {
+            console.log(order.id)
+            const apiUrl = `http://localhost:5274/Order/${order.id}/discountPercentage`;
+           
+            const body = JSON.stringify(JSON.stringify({order_discount_percentage: selectedDiscount.discount_percentage}));
+    
+            const headers = new Headers();
+            headers.append("Content-Type", "application/json");
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    body: body,
+                    headers: headers
+                });
+    
+                if (response.ok) {
+                    setShowCodeField(false);
+                    setShowDiscountSelect(false);
+                    setCodeHash("");
+                    alert("Discount successfully applied!");
+                    window.location.reload();
+                } 
+                else {
+                    console.error("Failed to apply discount:", response.statusText);
+                    alert("Error applying discount: " + response.statusText);
+                }
+            }
+            catch (error) {
+                console.error("Error occurred while applying discount:", error);
+            }
+
+        } 
+        else {
+            alert("Invalid code hash. Please try again.");
+        }
     }
 
     async function addItem(item) {
@@ -88,6 +158,31 @@ const Order = ({props}) => {
                 <div>
                     <button onClick={deleteYourself}>cancel order</button>
                     <button onClick={proceedToPay}>proceed to payment</button>
+                    <button onClick={showDiscountNames}>show/hide discounts</button>
+                </div>
+            }
+            {showDiscountSelect && 
+                <div>
+                    <select onChange={(e) => setSelectedDiscount(discounts.find(d => d.id == e.target.value))}>
+                        <option value="">Select a discount</option>
+                        {discounts.map(discount => (
+                            <option key={discount.id} value={discount.id}>
+                                {discount.discount_name} - {discount.discount_percentage}%
+                            </option>
+                        ))}
+                    </select>
+                    <button onClick={applySelectedDiscount}>Apply Discount</button>
+                </div>
+            }
+            {showCodeField &&
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Enter code hash"
+                        value={codeHash}
+                        onChange={(e) => setCodeHash(e.target.value)}
+                    />
+                    <button onClick={validateCodeHash}>Validate Code</button>
                 </div>
             }
             <div>

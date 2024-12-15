@@ -15,7 +15,7 @@ const CreateReservation = () => {
     const [appointment_time, SetAppointment_time] = useState('');
     const [duration, SetDuration] = useState('');
     const [reservationStatus, SetReservationStatus] = useState('');
-    const [service_id, SetService_id] = useState('');
+    const [service_id, SetService_id] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
