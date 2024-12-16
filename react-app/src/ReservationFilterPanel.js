@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 const ReservationFilterPanel = ({ onChange, SetIsFilterPanelVisible }) => {
   const [userRole, setUserRole] = useState(null);
+  const [businessId, SetbusinessId] = useState(null);
 
   useEffect(() => {
       const role = localStorage.getItem("userRole");
@@ -22,11 +23,12 @@ const ReservationFilterPanel = ({ onChange, SetIsFilterPanelVisible }) => {
       }
   }
 
-  let businessId = "";
-
   useEffect(() => {
-    const businessId = localStorage.getItem("businessId");
-}, []);
+      const id = localStorage.getItem("businessId");
+      if (id) {
+          SetbusinessId(parseInt(id, 10));
+      }
+  }, []);
 
   const [page_nr, Setpage_nr] = useState('');
   const [limit, Setlimit] = useState('');
