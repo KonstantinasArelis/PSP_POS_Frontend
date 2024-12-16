@@ -21,12 +21,15 @@ const Login = ({ onLogin }) => {
     
             const authToken = response.data.authToken; // Adjust based on actual response structure
             const role = response.data.role;
+            const id = response.data.id;
 
             localStorage.setItem("authToken", authToken);
             localStorage.setItem("userRole", role);
+            localStorage.setItem("userId", id);
 
             console.log("authToken", authToken)
             console.log("userRole", role);
+            console.log("userId", id);
     
             return response;
         } catch (error) {
