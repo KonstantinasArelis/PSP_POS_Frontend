@@ -189,7 +189,7 @@ const ReservationFilterPanel = ({ onChange, SetIsFilterPanelVisible }) => {
         />
 
         <select onChange={ (e) => Setstatus(e.target.value)}>
-            <option value = "RESERVERD" > RESERVERD</option>
+            <option value = "RESERVED" > RESERVED</option>
             <option value = "CANCELLED" > CANCELLED</option>
             <option value = "DONE" > DONE</option>
         </select>
