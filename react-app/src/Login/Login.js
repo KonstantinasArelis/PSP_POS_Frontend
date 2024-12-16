@@ -19,11 +19,13 @@ const Login = ({ onLogin }) => {
     
             console.log("Login successful:", response);
     
-            const authToken = response.data.authToken; // Adjust based on actual response structure
+            const authToken = response.data.authToken;
             const role = response.data.role;
+            const businessId = response.data.businessId;
 
             localStorage.setItem("authToken", authToken);
             localStorage.setItem("userRole", role);
+            localStorage.setItem("businessId", businessId);
     
             return response;
         } catch (error) {
