@@ -7,7 +7,7 @@ import AddItem from "./AddItem";
 
 const OrderView = () => {
     const [rerenderer, setRerenderer] = useState(0);
-    var userId = 1; //TODO: find out what the user's id is and insert it here
+    var userId = localStorage.getItem("userId");
     const params = useParams();
     const apiurl = "http://localhost:5274/Order/";
     const orderUrl = apiurl + params.id;

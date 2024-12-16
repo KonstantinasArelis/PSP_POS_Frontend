@@ -4,7 +4,7 @@ import useFetch from "../useFetch";
 const AddItem = ({props}) => {
     const [addItem, apiurl] = props;
     const [category, setCategory] = useState(0);
-    const categoryUrl = apiurl + "/Categories";
+    const categoryUrl = apiurl + "Categories";
     //const { error, isPending, data: fetchedCategories } = {error:false, isPending:false, data:mockCategories};
     //using mock categories since the real deal is not implemented yet
     const { error, isPending, data: fetchedCategories } = useFetch(categoryUrl);

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {useState } from "react";
 
 const Orders = () => {
-    var userId = "3AFF0D9B-5399-4D39-8B15-F3C158F8359F"; //TODO: find out what the user's id is and insert it here
+    var userId = localStorage.getItem("userId");
     const [url, SetUrl] = useState("http://localhost:5274/Order?employee_id=" + userId);
     console.log("the fetched url is " + url);
     const { error, isPending, data: orders } = useFetch(url);

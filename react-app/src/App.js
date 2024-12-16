@@ -14,48 +14,7 @@ import OrderView from './Order/OrderView';
 import OrderItemView from './Order/OrderItemView';
 import CreateReservation from './CreateReservation';
 import './App.css';
-import Payment from './Payment/Payment';
 import ProductManager from './Menu/ProductManager';
-
-/*
-function OrderList() {
-  const [orders, setOrders] = useState([]);
-  useEffect(() => {
-    const fetchOrders = async () => {
-      const orders = await window.electronAPI.getOrdersFrontend();
-      setOrders(orders);
-    };
-
-    fetchOrders();
-  }, []);
-
-  return (
-    <ul>
-      {orders.map((order) => (
-        <li key={order.id}>
-          Order ID: {order.id}, Total: {order.total_amount}
-        </li>
-      ))}
-    </ul>
-  );
-}
-*/
-
-import Navbar from './Navbar';
-import Dashboard from './Dashboard';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; // Use Switch instead of Routes
-import NotFound from './NotFound';
-import Menu from './Menu';
-import Business from './Business/Business';
-import Reservations from './Reservations';
-import Taxes from './Tax/Taxes';
-import Discounts from './Discount/Discounts';
-import DiscountView from './Discount/DiscountView';
-import Users from './Users';
-import Orders from './Order/Orders';
-import OrderView from './Order/OrderView';
-import OrderItemView from './Order/OrderItemView';
-import CreateReservation from './CreateReservation';
 import Payment from './Payment/Payment';
 import Login from "./Login/Login";
 
@@ -88,8 +47,8 @@ function App() {
                                 <Route path="/Users" component={Users} />
                                 <Route path="/Taxes" component={Taxes} />
                                 <Route path="/Discounts" component={Discounts} />
-                                <Route path="/Orders" component={Orders} />
-                                <Route path="/Orders/:id" component={OrderView} />
+                                <Route exact path="/Orders" component={Orders} />
+                                <Route exact path="/Orders/:id" component={OrderView} />
                                 <Route path="/Orders/:orderId/Item/:itemId" component={OrderItemView} />
                                 <Route path="/CreateReservation" component={CreateReservation} />
                                 <Route path="/Payment/:id" component={Payment} />
