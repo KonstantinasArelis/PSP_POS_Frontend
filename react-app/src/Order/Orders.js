@@ -3,9 +3,21 @@ import OrderViewInput from "./OrderViewInput";
 import useFetch from "../useFetch";
 import {Link} from "react-router-dom";
 import {useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const Orders = () => {
-    var userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("authToken");
+    let userId = "";
+
+    if (token) {
+        try {
+            const decodedToken = jwtDecode(token);
+            userId = decodedToken.sub;
+        } catch (error) {
+            console.error("Error decoding token:", error);
+        }
+    }
+    // var userId = localStorage.getItem("userId");
     const [url, SetUrl] = useState("http://localhost:5274/Order?employee_id=" + userId);
     console.log("the fetched url is " + url);
     const { error, isPending, data: orders } = useFetch(url);

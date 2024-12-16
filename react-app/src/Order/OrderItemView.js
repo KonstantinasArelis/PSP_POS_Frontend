@@ -3,11 +3,22 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "../useFetch";
 import NotFound from '../NotFound';
 import EditItem from "./EditItem";
+import { jwtDecode } from "jwt-decode";
 
 
 const OrderItemView = () => {
+    const token = localStorage.getItem("authToken");
+    let userId = "";
+
+    if (token) {
+        try {
+            const decodedToken = jwtDecode(token);
+            userId = decodedToken.sub;
+        } catch (error) {
+            console.error("Error decoding token:", error);
+        }
+    }
     const [rerenderer, setRerenderer] = useState(0);
-    var userId = localStorage.getItem("userId");
     const params = useParams();
     const apiurl = "http://localhost:5274/Order/";
     const itemUrl = apiurl + params.orderId + "/orderItem/" + params.itemId;
