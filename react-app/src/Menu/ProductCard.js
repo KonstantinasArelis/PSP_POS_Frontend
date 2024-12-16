@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCard = ({ product, onDelete }) => {
+const ProductCard = ({ product, onDelete, onEdit }) => {
     if (!product) {
         return <p>No product data available</p>;
     }
@@ -17,38 +17,52 @@ const ProductCard = ({ product, onDelete }) => {
             <p><strong>Discount Applicable:</strong> {product.canDiscountBeApplied ? "Yes" : "No"}</p>
             <p><strong>Tax ID:</strong> {product.taxId}</p>
             <p><strong>Variations:</strong> {product.variations}</p>
-            <button
-                onClick={() => onDelete(product.id)} // Pass product ID to onDelete
-                style={styles.deleteButton}
-            >
-                Delete
-            </button>
+            <div style={styles.buttonContainer}>
+                <button style={styles.editButton} onClick={() => onEdit(product)}>
+                    Edit
+                </button>
+                <button style={styles.deleteButton} onClick={() => onDelete(product.id)}>
+                    Delete
+                </button>
+            </div>
         </div>
     );
 };
 
 const styles = {
     card: {
-        border: "1px solid #ddd",
-        borderRadius: "8px",
-        padding: "16px",
-        maxWidth: "400px",
-        backgroundColor: "#f9f9f9",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        padding: '10px',
+        border: '1px solid #ccc',
+        borderRadius: '5px',
+        margin: '10px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
     },
     title: {
-        color: "#333",
-        fontSize: "24px",
-        marginBottom: "12px",
+        fontSize: '18px',
+        marginBottom: '10px',
+    },
+    buttonContainer: {
+        display: 'flex',
+        gap: '10px',
+    },
+    editButton: {
+        padding: '5px 10px',
+        backgroundColor: '#28a745',
+        color: '#fff',
+        border: 'none',
+        borderRadius: '3px',
+        cursor: 'pointer',
     },
     deleteButton: {
-        marginTop: "12px",
-        padding: "8px 16px",
-        border: "none",
-        borderRadius: "4px",
-        backgroundColor: "#FF4D4F",
-        color: "#fff",
-        cursor: "pointer",
+        padding: '5px 10px',
+        backgroundColor: '#dc3545',
+        color: '#fff',
+        border: 'none',
+        borderRadius: '3px',
+        cursor: 'pointer',
     },
 };
 
