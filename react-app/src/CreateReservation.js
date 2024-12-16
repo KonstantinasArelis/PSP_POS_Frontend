@@ -1,8 +1,21 @@
 import { useState } from 'react';
 import useFetch from "./useFetch";
 import "./App.css";
+import { jwtDecode } from "jwt-decode";
+import { useEffect } from "react";
 
 const CreateReservation = () => {
+    const token = localStorage.getItem("authToken");
+    let userId = "";
+
+    if (token) {
+        try {
+            const decodedToken = jwtDecode(token);
+            userId = decodedToken.sub;
+        } catch (error) {
+            console.error("Error decoding token:", error);
+        }
+    }
 
     const [isPending2, setIsPending2] = useState(false);
     const [id, SetId] = useState('');
@@ -16,12 +29,18 @@ const CreateReservation = () => {
     const [duration, SetDuration] = useState('');
     const [reservationStatus, SetReservationStatus] = useState('');
     const [service_id, SetService_id] = useState(null);
+    
+    useEffect(() => {
+        // Get the user's role from localStorage
+        const businessId = localStorage.getItem("businessId");
+        SetBusiness_id(businessId);
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsPending2(true);
 
-        const reservation = {client_name, client_phone, appointment_time, duration, service_id};
+        const reservation = {client_name, client_phone, appointment_time, duration, service_id, employee_id: userId, business_id};
         fetch('http://localhost:5274/Reservation', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},

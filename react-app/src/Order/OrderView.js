@@ -4,10 +4,21 @@ import useFetch from "../useFetch";
 import OrderItemsList from "./OrderItemsList";
 import NotFound from '../NotFound';
 import AddItem from "./AddItem";
+import { jwtDecode } from "jwt-decode";
 
 const OrderView = () => {
+    const token = localStorage.getItem("authToken");
+    let userId = "";
+
+    if (token) {
+        try {
+            const decodedToken = jwtDecode(token);
+            userId = decodedToken.sub;
+        } catch (error) {
+            console.error("Error decoding token:", error);
+        }
+    }
     const [rerenderer, setRerenderer] = useState(0);
-    var userId = localStorage.getItem("userId");
     const params = useParams();
     const apiurl = "http://localhost:5274/Order/";
     const orderUrl = apiurl + params.id;

@@ -19,17 +19,13 @@ const Login = ({ onLogin }) => {
     
             console.log("Login successful:", response);
     
-            const authToken = response.data.authToken; // Adjust based on actual response structure
+            const authToken = response.data.authToken;
             const role = response.data.role;
-            const id = response.data.id;
+            const businessId = response.data.businessId;
 
             localStorage.setItem("authToken", authToken);
             localStorage.setItem("userRole", role);
-            localStorage.setItem("userId", id);
-
-            console.log("authToken", authToken)
-            console.log("userRole", role);
-            console.log("userId", id);
+            localStorage.setItem("businessId", businessId);
     
             return response;
         } catch (error) {
@@ -64,12 +60,12 @@ const Login = ({ onLogin }) => {
     };
 
     const loginWindow = (
-        <Container className="m-5">
-            <Row className="justify-content-center">
-                <Col md={6} className="border rounded shadow h-auto p-5">
-                    <h2 className="text-center">Login</h2>
+        <Container>
+            <Row>
+                <Col md={6}>
+                    <h2>Login</h2>
                     {error && <Alert color="danger">{error}</Alert>}
-                    {success && <Alert color="success">Login/Register successful!</Alert>}
+                    {success && <Alert color="success">Login successful!</Alert>}
                     <Form onSubmit={handleLogin}>
                         <FormGroup>
                             <Label for="username">Username</Label>
@@ -93,10 +89,10 @@ const Login = ({ onLogin }) => {
                                 required
                             />
                         </FormGroup>
-                        <Button color="primary" type="submit" block>
+                        <Button type="submit" block>
                             Login
                         </Button>
-                        <Button color="secondary" onClick={() => autofill()} className="mt-1" block>
+                        <Button onClick={() => autofill()} block>
                             Autofill
                         </Button>
                     </Form>

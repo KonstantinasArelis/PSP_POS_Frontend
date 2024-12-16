@@ -32,7 +32,9 @@ const EditBusinessPanel = ({id, onRefresh}) => {
 
     return (
         <div>
-            <button onClick={() => {SetIsPanelVisible(true)}} className='createReservationButton CreateBusinessButton'>Edit Business</button>
+            <div className="button-group">
+                <button onClick={() => {SetIsPanelVisible(true)}} className='createReservationButton CreateBusinessButton'>Edit Business</button>
+            </div>
             {isPanelVisible && 
                 <div>
                     <form className='CreateReservation CreateBusiness'>
@@ -61,10 +63,17 @@ const EditBusinessPanel = ({id, onRefresh}) => {
                             value = {currency}
                             onChange={(e) => SetCurrency(e.target.value)}
                         ></input>
-                        <button onClick={handleEditBusiness} className='createReservationButton CreateBusinessButton'>Submit</button>
-                        <button onClick={() => {SetIsPanelVisible(false)}} className='createReservationButton CreateBusinessButton'>Cancel</button>
+                        <div className="button-group">
+                            <button onClick={handleEditBusiness} className='createReservationButton CreateBusinessButton'>
+                                Submit
+                            </button>
+                            <button onClick={() => {SetIsPanelVisible(false)}} className='createReservationButton CreateBusinessButton'>
+                                Cancel
+                            </button>
+                        </div>
                     </form>
-                </div>}
+                </div>
+            }
         </div>
     )
 }

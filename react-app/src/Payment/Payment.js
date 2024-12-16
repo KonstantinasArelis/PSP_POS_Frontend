@@ -9,6 +9,7 @@ const Payment = () => {
     const [payments, setPayments] = useState(null);
     const [order, setOrder] = useState(null);
     const [giftCardId, setGiftCardId] = useState(null);
+    const [business_id, SetBusiness_id] = useState('');
 
     const getUrl = `http://localhost:5274/Payment?order_id=${id}`;
     const postUrl = `http://localhost:5274/Payment`;
@@ -16,6 +17,12 @@ const Payment = () => {
 
     const [totalPaid, SetTotalPaid] = useState(0);
     const [totalTip, SetTotalTip] = useState(0);
+
+    useEffect(() => {
+        // Get the user's role from localStorage
+        const businessId = localStorage.getItem("businessId");
+        SetBusiness_id(businessId);
+    }, []);
 
     const fetchPayments = () => {
         console.log("fetch payments now from " + getUrl);
@@ -32,7 +39,7 @@ const Payment = () => {
     }
     const makePayment = () => {
 
-        const newPayment = {order_id: id, total_amount: amountToBePaid, order_amount: null, tip_amount: tipAmount, payment_method: paymentMethod, gift_card_id: null};
+        const newPayment = {order_id: id, total_amount: amountToBePaid, order_amount: null, tip_amount: tipAmount, payment_method: paymentMethod, gift_card_id: null, business_id};
 
         fetch(postUrl, {
             method: "POST",
