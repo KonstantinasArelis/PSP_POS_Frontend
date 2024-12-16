@@ -3,9 +3,16 @@ import SingleBusiness from './SingleBusiness';
 
 const BusinessRegularUser = () => {
     const [data,SetData] = useState(null);
-    const id = 2; //remove later
+    const [business_id, SetBusiness_id] = useState(null);
 
-    const url = `http://localhost:5274/Business/${id}`;
+    useEffect(() => {
+        const id = localStorage.getItem("businessId");
+        if (id) {
+            SetBusiness_id(parseInt(id, 10));
+        }
+    }, []);
+
+    const url = `http://localhost:5274/Business/${business_id}`;
     useEffect(() => {
         fetch(url, {
                 method: 'GET'
@@ -20,13 +27,13 @@ const BusinessRegularUser = () => {
             }).catch(err => {
                 console.error("Error fetching business data", err);
             })
-    }, [id]);
+    }, [business_id]);
     
 
 
     return(
         <div>
-            <h2>Regular User Business View: </h2>
+            <h2>Business View: </h2>
             
             {data && <SingleBusiness Business={data}/>}
         </div>

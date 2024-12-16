@@ -6,12 +6,25 @@ import EditBusinessPanel from "./EditBusinessPanel";
 const BusinessAdminUser = () => {
     const [data, SetData] = useState(null);
     const [refreshTrigger, SetRefreshTrigger] = useState(0);
+    const [business_id, SetBusiness_id] = useState(null);
+    const [userRole, setUserRole] = useState(null);
+  
+    useEffect(() => {
+        const role = localStorage.getItem("userRole");
+        setUserRole(role);
+    }, []);
+    
+    useEffect(() => {
+        const id = localStorage.getItem("businessId");
+        if (id) {
+            SetBusiness_id(parseInt(id, 10));
+        }
+    }, []);
 
     const handleRefresh = () => {
         SetRefreshTrigger(prevTrigger => prevTrigger + 1);
         console.log("trigger triggered");
     }
-
 
 
     const url = `http://localhost:5274/Business`;
@@ -34,15 +47,17 @@ const BusinessAdminUser = () => {
 
     return(
         <div>
-            <h2>Admin User Business View:</h2>
-            <CreateBusinessPanel/>
+            <h2>Business View:</h2>
+            {userRole === "SUPER_ADMIN" && <CreateBusinessPanel />}
             <div className="businessList">
                 {data && data.map(business => (
-                    
-                    <div key={business.id}>
-                        <SingleBusiness Business={business}> </SingleBusiness>
-                        <EditBusinessPanel id={business.id} onRefresh = {handleRefresh}/>
-                    </div>
+                    (userRole === "SUPER_ADMIN" || 
+                    (userRole === "OWNER" && business.id === business_id)) && (
+                        <div key={business.id}>
+                            <SingleBusiness Business={business} />
+                            <EditBusinessPanel id={business.id} onRefresh={handleRefresh} />
+                        </div>
+                    )
                 ))}
             </div>
         </div>

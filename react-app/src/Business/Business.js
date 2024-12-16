@@ -7,13 +7,12 @@ const Business = () => {
     const [userRole, setUserRole] = useState(null);
 
     useEffect(() => {
-        // Get the user's role from localStorage
         const role = localStorage.getItem("userRole");
         setUserRole(role);
     }, []);
 
     if (!userRole) {
-        return <div>Loading...</div>; // Optional: show a loading state while the role is being retrieved
+        return <div>Loading...</div>;
     }
 
     console.log("userRole", userRole);
@@ -21,11 +20,11 @@ const Business = () => {
     return (
         <div>
             {userRole === "SUPER_ADMIN" || userRole === "OWNER" ? (
-                <BusinessAdminUser /> // Show admin view for SUPER_ADMIN or OWNER
+                <BusinessAdminUser /> 
             ) : userRole === "EMPLOYEE" ? (
-                <BusinessRegularUser /> // Show regular user view for EMPLOYEE
+                <BusinessRegularUser />
             ) : (
-                <div>Unauthorized access</div> // Handle invalid roles if needed
+                <div>Unauthorized access</div>
             )}
         </div>
     );
