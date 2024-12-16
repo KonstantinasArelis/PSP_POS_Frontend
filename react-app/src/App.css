@@ -178,12 +178,12 @@
     margin: 5px;
 }
 
-.createReservationButton.CreateBusinessButton{
-
-}
-
 .businessList {
     margin-top: 50px;
+}
+
+.button-group {
+    padding-bottom: 60px;
 }
 
 .payment {
