@@ -6,10 +6,22 @@ import {Link} from "react-router-dom"
 import { useEffect, useState } from "react";
 import './App.css';
 import { useHistory } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 
 const Reservations = () => {
+    const token = localStorage.getItem("authToken");
+    let userId = "";
+
+    if (token) {
+        try {
+            const decodedToken = jwtDecode(token);
+            userId = decodedToken.sub;
+        } catch (error) {
+            console.error("Error decoding token:", error);
+        }
+    }
     //const { error, isPending, data: reservations } = useFetch('http://localhost:5274/order?employee_id=123&min_total_amount=50&max_total_amount=1000&order_status=OPEN&page_nr=0&limit=25')
-    const [url, SetUrl] = useState("http://localhost:5274/Reservation?status=RESERVED");
+    const [url, SetUrl] = useState("http://localhost:5274/Reservation?status=RESERVED&employee_id=" + userId);
     const [refreshTrigger, SetRefreshTrigger] = useState(0);
     const [isFilterPanelVisible, SetIsFilterPanelVisible] = useState(false);
 

@@ -60,12 +60,12 @@ const Login = ({ onLogin }) => {
     };
 
     const loginWindow = (
-        <Container className="m-5">
-            <Row className="justify-content-center">
-                <Col md={6} className="border rounded shadow h-auto p-5">
-                    <h2 className="text-center">Login</h2>
+        <Container>
+            <Row>
+                <Col md={6}>
+                    <h2>Login</h2>
                     {error && <Alert color="danger">{error}</Alert>}
-                    {success && <Alert color="success">Login/Register successful!</Alert>}
+                    {success && <Alert color="success">Login successful!</Alert>}
                     <Form onSubmit={handleLogin}>
                         <FormGroup>
                             <Label for="username">Username</Label>
@@ -89,10 +89,10 @@ const Login = ({ onLogin }) => {
                                 required
                             />
                         </FormGroup>
-                        <Button color="primary" type="submit" block>
+                        <Button type="submit" block>
                             Login
                         </Button>
-                        <Button color="secondary" onClick={() => autofill()} className="mt-1" block>
+                        <Button onClick={() => autofill()} block>
                             Autofill
                         </Button>
                     </Form>

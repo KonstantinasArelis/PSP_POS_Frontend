@@ -1,7 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import './App.css';
+import { jwtDecode } from "jwt-decode";
 
 const ReservationFilterPanel = ({ onChange, SetIsFilterPanelVisible }) => {
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+      const role = localStorage.getItem("userRole");
+      setUserRole(role);
+  }, []);
+
+  const token = localStorage.getItem("authToken");
+  let userId = "";
+
+  if (token) {
+      try {
+          const decodedToken = jwtDecode(token);
+          userId = decodedToken.sub;
+      } catch (error) {
+          console.error("Error decoding token:", error);
+      }
+  }
+
+  let businessId = "";
+
+  useEffect(() => {
+    const businessId = localStorage.getItem("businessId");
+}, []);
+
   const [page_nr, Setpage_nr] = useState('');
   const [limit, Setlimit] = useState('');
   const [id, Setid] = useState('');
@@ -27,8 +53,8 @@ const ReservationFilterPanel = ({ onChange, SetIsFilterPanelVisible }) => {
       page_nr: page_nr,
       limit: limit,
       id: id,
-      business_id: business_id,
-      employee_id: employee_id,
+      business_id: userRole === 'OWNER' ? businessId : business_id,
+      employee_id: userRole === 'EMPLOYEE' ? userId : employee_id,
       client_name: client_name,
       client_phone: client_phone,
       created_before: created_before,
@@ -84,21 +110,26 @@ const ReservationFilterPanel = ({ onChange, SetIsFilterPanelVisible }) => {
           placeholder="Enter limit"
         />
 
-        <input
-          type="text"
-          id="business_id"
-          value={business_id}
-          onChange={(e) => Setbusiness_id(e.target.value)}
-          placeholder="Enter business ID"
-        />
+        {userRole !== 'EMPLOYEE' && (
+          <input
+            type="text"
+            id="business_id"
+            value={userRole === 'OWNER' ? businessId : business_id}
+            onChange={(e) => Setbusiness_id(e.target.value)}
+            placeholder="Enter business ID"
+            disabled={userRole === 'OWNER'}
+          />
+        )}
 
-        <input
-          type="text"
-          id="employee_id"
-          value={employee_id}
-          onChange={(e) => Setemployee_id(e.target.value)}
-          placeholder="Enter employee ID"
-        />
+        {userRole !== 'EMPLOYEE' && (
+          <input
+            type="text"
+            id="employee_id"
+            value={employee_id}
+            onChange={(e) => Setemployee_id(e.target.value)}
+            placeholder="Enter employee ID"
+          />
+        )}
 
         <input
           type="text"
