@@ -2,7 +2,7 @@ import Navbar from './Navbar';
 import Dashboard from './Dashboard';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NotFound from './NotFound';
-import Menu from './Menu';
+import Menu from './Menu/Menu';
 import Business from './Business/Business';
 import Reservations from './Reservations';
 import Taxes from './Tax/Taxes';
@@ -15,6 +15,7 @@ import OrderItemView from './Order/OrderItemView';
 import CreateReservation from './CreateReservation';
 import './App.css';
 import Payment from './Payment/Payment';
+import ProductManager from './Menu/ProductManager';
 
 /*
 function OrderList() {
