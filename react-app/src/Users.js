@@ -32,6 +32,7 @@ const Users = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log("test: " + JSON.stringify(formData));
         setFormData({
             ...formData,
             [name]: value
@@ -150,7 +151,7 @@ const Users = () => {
                     <input
                         type="text"
                         name="businessId"
-                        value={userRole === 'OWNER' ? business_id : formData.businessId}
+                        value={userRole === 'OWNER' ? formData.businessId = business_id : formData.businessId}
                         onChange={handleChange}
                         disabled={userRole === 'OWNER'}
                         required
