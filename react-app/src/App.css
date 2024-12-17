@@ -6,7 +6,7 @@
     margin: 5px;
     padding: 10px;
     height: 250px;
-    width: 250px;
+    width: 500px;
 }
 
 .allReservationsContainer {
@@ -61,7 +61,7 @@
 .reservationEmployeeId {
     position: absolute;
     font-weight: 100;
-    font-size: 160%;
+    font-size: 140%;
     top: 50%;
 }
 
@@ -107,7 +107,7 @@
 .editClickZone {
     position: relative;
     height: 250px;
-    width: 250px;
+    width: 500px;
     z-index: 1;
 }
 
@@ -196,4 +196,11 @@
     background-color: rgb(206, 217, 255);
     border-radius: 20px;
     margin: 10px;
+}
+
+.disabled-input {
+    background-color: #f0f0f0;
+    color: #a9a9a9;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
 }
