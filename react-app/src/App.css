@@ -6,7 +6,7 @@
     margin: 5px;
     padding: 10px;
     height: 250px;
-    width: 250px;
+    width: 500px;
 }
 
 .allReservationsContainer {
@@ -61,7 +61,7 @@
 .reservationEmployeeId {
     position: absolute;
     font-weight: 100;
-    font-size: 160%;
+    font-size: 140%;
     top: 50%;
 }
 
@@ -107,7 +107,7 @@
 .editClickZone {
     position: relative;
     height: 250px;
-    width: 250px;
+    width: 500px;
     z-index: 1;
 }
 
