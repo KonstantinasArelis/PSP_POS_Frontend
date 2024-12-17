@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
 import { Alert, Button, Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
 
 const API_BASE_URL = "http://localhost:5274";
@@ -27,8 +28,12 @@ const Login = ({ onLogin }) => {
                 throw new Error(errorData.message || "Login failed");
             }
 
-            const { authToken, role, businessId } = await response.json();
-            // Save credentials in localStorage
+            const { authToken } = await response.json();
+
+            const decodedToken = jwtDecode(authToken);
+            const businessId = decodedToken.businessId;
+            const role = decodedToken.role;
+            
             localStorage.setItem("authToken", authToken);
             localStorage.setItem("userRole", role);
             localStorage.setItem("businessId", businessId);
