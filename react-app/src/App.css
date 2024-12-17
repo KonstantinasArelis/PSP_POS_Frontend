@@ -197,3 +197,10 @@
     border-radius: 20px;
     margin: 10px;
 }
+
+.disabled-input {
+    background-color: #f0f0f0;
+    color: #a9a9a9;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+}
