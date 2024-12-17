@@ -66,22 +66,6 @@ const TaxViewInput = ( {onChange}) => {
         }
     }
 
-    // return(
-    //     <div>
-    //         <form onSubmit={HandleSubmit}>
-    //             <label>id:</label>
-    //             <input
-    //             type="text"
-    //             required
-    //             value={id}
-    //             onChange={(e) => Setid(e.target.value)}
-    //             ></input>
-    //             {!isPending && <button>Submit</button>}
-    //             {isPending && <button disabled>Loading...</button>}
-    //         </form>
-    //     </div>
-    // );
-
     return(
         <div>
             <form onSubmit={handleSubmit}>
