@@ -6,13 +6,12 @@ import NotFound from '../NotFound';
 
 const DiscountView = () => {
     console.log("loading discountView component");
-    //var userId = 1; //TODO: find out what the user's id is and insert it here // is it needed for discounts??? // is user id used in order to display the orders of a specific user (employee)??
     const params = useParams();
     const apiurl = "http://localhost:5274/Discount/";
     const discountUrl = apiurl + params.id;
     const { error, isPending, data: discount } = useFetch(discountUrl);
 
-    return( // 3rd line inside div is not for discounts ({discount && (userId == discount.business_id ? <Discount props={[discount, apiurl]}/> : <NotFound/>)})
+    return( 
         <div>
             {error && <NotFound/>}
             {isPending && <div>Loading...</div>}
@@ -22,7 +21,7 @@ const DiscountView = () => {
 }
 
 const Discount = ({props}) => {
-    const [discount, apiurl] = props; //apiurl is not needed
+    const [discount, apiurl] = props; 
     return(
         <div className="fullDiscount">
             <div>

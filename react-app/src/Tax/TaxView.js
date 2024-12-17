@@ -6,13 +6,12 @@ import NotFound from '../NotFound';
 
 const TaxView = () => {
     console.log("loading taxView component");
-    //var userId = 1; //TODO: find out what the user's id is and insert it here // is it needed for taxes??? // is user id used in order to display the orders of a specific user (employee)??
     const params = useParams();
     const apiurl = "http://localhost:5274/Tax/";
     const taxUrl = apiurl + params.id;
     const { error, isPending, data: tax } = useFetch(taxUrl);
 
-    return( // 3rd line inside div is not for taxes ({tax && (userId == tax.business_id(??????????) ? <Tax props={[tax, apiurl]}/> : <NotFound/>)})
+    return(
         <div>
             {error && <NotFound/>}
             {isPending && <div>Loading...</div>}
@@ -22,7 +21,7 @@ const TaxView = () => {
 }
 
 const Tax = ({props}) => {
-    const [tax, apiurl] = props; //apiurl is not needed
+    const [tax, apiurl] = props; 
     return(
         <div className="fullTax">
             <div>

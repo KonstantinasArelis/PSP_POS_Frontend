@@ -14,7 +14,6 @@ const Discounts = () => {
 
     async function createDiscount(){
         var discount = newDiscount;
-        //newDiscount.employee_id = userId; // not suitable for discount, why is it even as it is?
         var serializedDiscount = JSON.stringify(JSON.stringify(discount));
         var headers = new Headers();
         headers.append("Content-Type", "application/json");

@@ -14,7 +14,6 @@ const Taxes = () => {
 
     async function createTax(){
         var tax = newTax;
-        //newTax.employee_id = userId; // not suitable for tax, why is it even as it is?
         var serializedTax = JSON.stringify(JSON.stringify(tax));
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
