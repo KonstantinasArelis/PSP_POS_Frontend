@@ -28,7 +28,6 @@ const Login = ({ onLogin }) => {
             }
 
             const { authToken, role, businessId } = await response.json();
-            console.log("SAVED: " + authToken + role + businessId);
             // Save credentials in localStorage
             localStorage.setItem("authToken", authToken);
             localStorage.setItem("userRole", role);
