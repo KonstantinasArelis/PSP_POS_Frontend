@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
 import { Alert, Button, Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { apiService } from "../ApiService.js";
+
+const API_BASE_URL = "http://localhost:5274";
 
 const Login = ({ onLogin }) => {
     const [username, setUsername] = useState("");
@@ -10,26 +12,36 @@ const Login = ({ onLogin }) => {
 
     const login = async (username, password) => {
         try {
-            const loginRequestDTO = {
-                Username: username,
-                Password: password,
-            };
-    
-            const response = await apiService.post("/auth/login", loginRequestDTO);
-    
-            console.log("Login successful:", response);
-    
-            const authToken = response.data.authToken;
-            const role = response.data.role;
-            const businessId = response.data.businessId;
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    Username: username,
+                    Password: password,
+                }),
+            });
 
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Login failed");
+            }
+
+            const { authToken } = await response.json();
+
+            const decodedToken = jwtDecode(authToken);
+            const businessId = decodedToken.businessId;
+            const role = decodedToken.role;
+            
             localStorage.setItem("authToken", authToken);
             localStorage.setItem("userRole", role);
             localStorage.setItem("businessId", businessId);
-    
-            return response;
+
+            return { authToken, role, businessId };
         } catch (error) {
             console.error("Login failed:", error.message);
+            throw error;
         }
     };
     
@@ -38,20 +50,19 @@ const Login = ({ onLogin }) => {
         e.preventDefault();
         setError(null);
         setSuccess(false);
-    
+
         try {
             const response = await login(username, password);
-            if (response && response.isSuccess) {
-                onLogin();
+            if (response) {
+                onLogin(); // Notify parent of login success
                 setSuccess(true);
             } else {
                 setError("Login failed. Access denied.");
             }
         } catch (err) {
-            setError("Login failed. Please check your credentials.");
-            console.log(err);
+            setError(err.message || "Login failed. Please check your credentials.");
         }
-    };
+    };    
     
 
     const autofill = () => {
