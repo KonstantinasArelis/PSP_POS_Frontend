@@ -17,6 +17,7 @@ const CreateReservation = () => {
         }
     }
 
+    const { error, isPending, data: fetchedProducts } = useFetch("http://localhost:5274/Menu");
     const [isPending2, setIsPending2] = useState(false);
     const [id, SetId] = useState('');
     const [business_id, SetBusiness_id] = useState('');
@@ -29,7 +30,7 @@ const CreateReservation = () => {
     const [duration, SetDuration] = useState('');
     const [reservationStatus, SetReservationStatus] = useState('');
     const [service_id, SetService_id] = useState(null);
-    
+    const [product, setProduct] = useState(0);
     useEffect(() => {
         // Get the user's role from localStorage
         const businessId = localStorage.getItem("businessId");
@@ -40,7 +41,7 @@ const CreateReservation = () => {
         e.preventDefault();
         setIsPending2(true);
 
-        const reservation = {client_name, client_phone, appointment_time, duration, service_id, employee_id: userId, business_id};
+        const reservation = {client_name, client_phone, appointment_time, duration, service_id: product, employee_id: userId, business_id};
         fetch('http://localhost:5274/Reservation', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
@@ -83,12 +84,13 @@ const CreateReservation = () => {
                         value={duration}
                         onChange={(e) => SetDuration(e.target.value)}
                     ></input>
-                <label>service_id:</label>
-                    <input
-                        type="text"
-                        value={service_id}
-                        onChange={(e) => SetService_id(e.target.value)}
-                ></input>
+                    {fetchedProducts && <select value={product} onChange={e => setProduct(e.target.value)}>
+                        <option value="0">-</option>
+                        {fetchedProducts.map(product => (
+                            <option key={product.id} value={product.id}>{product.productName}</option>
+                        ))}
+                </select>}
+                
                 {!isPending2 && <button className='createReservationButton'>Add Reservation</button>}
                 {isPending2 && <button disabled> Adding...</button>}
             </form>

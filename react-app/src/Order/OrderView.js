@@ -165,7 +165,14 @@ const Order = ({props}) => {
                 <p>created at: {order.created_at == null ? null : new Date(order.created_at).toLocaleDateString("LT")}</p>            
                 <p>closed at: {order.closed_at == null ? null : new Date(order.created_at).toLocaleDateString("LT")}</p>
             </div>
-            { order.order_status == "OPEN" || order.order_status == "PENDING_PAYMENT" &&
+            { order.order_status == "OPEN" &&
+                <div>
+                    <button onClick={deleteYourself}>cancel order</button>
+                    <button onClick={proceedToPay}>proceed to payment</button>
+                    <button onClick={showDiscountNames}>show/hide discounts</button>
+                </div>
+            }
+            { order.order_status == "PENDING_PAYMENT" &&
                 <div>
                     <button onClick={deleteYourself}>cancel order</button>
                     <button onClick={proceedToPay}>proceed to payment</button>
