@@ -172,6 +172,13 @@ const Order = ({props}) => {
                     <button onClick={showDiscountNames}>show/hide discounts</button>
                 </div>
             }
+            { order.order_status == "PENDING_PAYMENT" &&
+                <div>
+                    <button onClick={deleteYourself}>cancel order</button>
+                    <button onClick={proceedToPay}>proceed to payment</button>
+                    <button onClick={showDiscountNames}>show/hide discounts</button>
+                </div>
+            }
             {showDiscountSelect && 
                 <div>
                     <select onChange={(e) => setSelectedDiscount(discounts.find(d => d.id == e.target.value))}>

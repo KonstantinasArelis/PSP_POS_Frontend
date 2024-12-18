@@ -28,6 +28,10 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
     })
   };
 
+  const handlePay = (e) => {
+    history.push(`/Orders`);
+  }
+
   const handleCancelReservation = (e) => {
     e.preventDefault();
     SetReservationStatus("CANCELLED");
@@ -99,6 +103,7 @@ const ReservationEditPanel = ({ reservation, onRefresh}) => {
 
         <button type="submit" className="createReservationButton reservationEditSubmit">Confirm edit</button>
         <button className="createReservationButton reservationEditSubmit" onClick={handleCancelReservation}>Cancel Reservation</button>
+        <button className="createReservationButton reservationEditSubmit" onClick={handlePay}>Pay</button>
       </form>
     </div>
   );
