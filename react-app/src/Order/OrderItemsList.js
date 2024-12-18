@@ -120,7 +120,7 @@ const OrderItem = ({props}) => {
                 </div>
             }
             <div className="column2">
-                <Link to={"/Orders/" + item.order_id + "/Item/" + item.id}><button>open</button></Link>
+                {!item.reservation_id && <Link to={"/Orders/" + item.order_id + "/Item/" + item.id}><button>open</button></Link>}
                 <button onClick={editable ? () => removeItem(item) : null}>delete</button>
                 <button onClick={showDiscountNames}>show/hide discounts</button>
             </div>
