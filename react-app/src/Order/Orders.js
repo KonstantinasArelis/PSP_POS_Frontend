@@ -2,13 +2,13 @@ import OrderList from "./OrderList";
 import OrderViewInput from "./OrderViewInput";
 import useFetch from "../useFetch";
 import {Link} from "react-router-dom";
-import {useState } from "react";
+import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 
 const Orders = () => {
     const token = localStorage.getItem("authToken");
     let userId = "";
-
+    
     if (token) {
         try {
             const decodedToken = jwtDecode(token);
@@ -17,6 +17,15 @@ const Orders = () => {
             console.error("Error decoding token:", error);
         }
     }
+    
+    const [businessId, SetBusinessId] = useState(null);
+
+    useEffect(() => {
+        const id = localStorage.getItem("businessId");
+        if (id) {
+            SetBusinessId(parseInt(id, 10));
+        }
+    }, []);
     // var userId = localStorage.getItem("userId");
     const [url, SetUrl] = useState("http://localhost:5274/Order?employee_id=" + userId);
     console.log("the fetched url is " + url);
@@ -29,6 +38,7 @@ const Orders = () => {
     async function createOrder(){
         var order = newOrder;
         order.employee_id = userId;
+        order.business_id = businessId;
         var serializedOrder = JSON.stringify(order);
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
